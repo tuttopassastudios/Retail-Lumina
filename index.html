@@ -49,8 +49,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-  <!-- Preload LCP image -->
-  <link rel="preload" as="image" type="image/webp" href="images/store-shelf-bg.webp">
+  <!-- Preload shelf scroll video -->
+  <link rel="preload" as="video" href="videos/shelf-scroll.mp4">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -378,7 +378,7 @@
       z-index: -1;
     }
 
-    /* ========== SHELF PHOTO + LED OVERLAYS ========== */
+    /* ========== SHELF VIDEO ========== */
     .shelf-scene {
       width: 100%;
       flex: 1;
@@ -390,126 +390,20 @@
       flex-shrink: 0;
     }
 
-    .shelf-photo-wrap {
+    .shelf-video-wrap {
       position: relative;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      max-height: 520px;
       box-shadow:
         0 25px 60px rgba(0,0,0,0.18),
         0 8px 20px rgba(0,0,0,0.08);
     }
 
-    .shelf-photo {
+    .shelf-video-wrap video {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 35%;
       display: block;
-      filter: brightness(0.92) contrast(1.05);
     }
 
-    /* LED screen overlay strips */
-    .led-overlay {
-      position: absolute;
-      left: 1.5%;
-      right: 1.5%;
-      height: 5.2%;
-      overflow: hidden;
-      border-radius: 2px;
-      z-index: 2;
-    }
-
-    .led-overlay::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 2px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    /* Position each strip on real shelf edges */
-    .led-1 {
-      top: 18.5%;
-      background: linear-gradient(90deg, #020818 0%, #051025 50%, #020818 100%);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.25), 0 0 50px rgba(56, 189, 248, 0.08);
-    }
-
-    .led-2 {
-      top: 50.5%;
-      background: linear-gradient(90deg, #0f0208 0%, #180512 50%, #0f0208 100%);
-      box-shadow: 0 0 20px rgba(251, 113, 133, 0.25), 0 0 50px rgba(251, 113, 133, 0.08);
-    }
-
-    .led-3 {
-      top: 81.5%;
-      background: linear-gradient(90deg, #02080a 0%, #051510 50%, #02080a 100%);
-      box-shadow: 0 0 20px rgba(74, 222, 128, 0.25), 0 0 50px rgba(74, 222, 128, 0.08);
-    }
-
-    /* Scrolling text track */
-    .led-track {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      white-space: nowrap;
-      animation: ledScroll 22s linear infinite;
-    }
-
-    .led-track-alt {
-      animation: ledScroll 26s linear infinite;
-    }
-
-    .led-text {
-      display: inline-block;
-      font-family: 'Inter', monospace, sans-serif;
-      font-size: clamp(10px, 1.4vw, 15px);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      white-space: nowrap;
-      padding-right: 80px;
-    }
-
-    .led-1 .led-text { color: #38bdf8; text-shadow: 0 0 12px rgba(56, 189, 248, 0.5); }
-    .led-2 .led-text { color: #fb7185; text-shadow: 0 0 12px rgba(251, 113, 133, 0.5); }
-    .led-3 .led-text { color: #4ade80; text-shadow: 0 0 12px rgba(74, 222, 128, 0.5); }
-
-    @keyframes ledScroll {
-      0% { transform: translateX(10%); }
-      100% { transform: translateX(-100%); }
-    }
-
-    /* Glow effects cast by each screen */
-    .led-glow {
-      position: absolute;
-      left: 5%;
-      right: 5%;
-      height: 8%;
-      pointer-events: none;
-      z-index: 1;
-      border-radius: 50%;
-      filter: blur(12px);
-      opacity: 0.2;
-    }
-
-    .led-glow-1 {
-      top: 20%;
-      background: radial-gradient(ellipse, rgba(56, 189, 248, 0.5) 0%, transparent 70%);
-    }
-
-    .led-glow-2 {
-      top: 52%;
-      background: radial-gradient(ellipse, rgba(251, 113, 133, 0.5) 0%, transparent 70%);
-    }
-
-    .led-glow-3 {
-      top: 83%;
-      background: radial-gradient(ellipse, rgba(74, 222, 128, 0.5) 0%, transparent 70%);
-    }
-
-    /* Scroll progress indicator */
     .shelf-scroll-hint {
       text-align: center;
       margin-top: 20px;
@@ -518,6 +412,7 @@
       font-weight: 500;
       color: var(--text-muted);
       opacity: 0.6;
+      transition: opacity 0.3s;
     }
 
     .shelf-scroll-hint span {
@@ -533,7 +428,6 @@
     @media (max-width: 768px) {
       .shelf-scene { max-width: 100%; margin-top: 32px; }
       .shelf-scroll-hint { padding-bottom: 32px; }
-      .led-text { font-size: 9px; }
     }
 
     /* ========== SECTIONS ========== */
@@ -1441,32 +1335,15 @@
         </div>
       </div>
 
-      <!-- Shelf Display -->
+      <!-- Shelf Display — scroll-driven video -->
       <div class="shelf-scene" id="shelfScene">
-      <div class="shelf-photo-wrap">
-        <picture>
-          <source srcset="images/store-shelf-bg.webp" type="image/webp">
-          <img src="images/store-shelf-bg.jpg" alt="Convenience store shelf with beverages and energy drinks" class="shelf-photo" loading="eager" fetchpriority="high" width="1600" height="2400">
-        </picture>
-
-        <!-- Animated LED screen overlays positioned on shelf edges -->
-        <div class="led-overlay led-1">
-          <div class="led-track"><span class="led-text">Organic Energy Blend &mdash; $3.49&ensp;&ensp;|&ensp;&ensp;Sugar-Free Red Bull 4pk &mdash; $7.99&ensp;&ensp;|&ensp;&ensp;Electrolyte Water &mdash; $1.89&ensp;&ensp;|&ensp;&ensp;Cold Brew Coffee &mdash; $4.29&ensp;&ensp;|&ensp;&ensp;Updated 2 min ago</span></div>
+        <div class="shelf-video-wrap">
+          <video id="shelfVideo" muted playsinline preload="auto">
+            <source src="videos/shelf-scroll.mp4" type="video/mp4">
+          </video>
         </div>
-        <div class="led-overlay led-2">
-          <div class="led-track led-track-alt"><span class="led-text">BUY 2 SAVE 20% &mdash; Premium Energy Drinks&ensp;&ensp;|&ensp;&ensp;NEW: Craft Sparkling Water &mdash; Intro Price&ensp;&ensp;|&ensp;&ensp;WEEKEND DEAL: Gatorade 8pk $6.99&ensp;&ensp;|&ensp;&ensp;FLASH SALE: Protein Shakes 40% Off</span></div>
-        </div>
-        <div class="led-overlay led-3">
-          <div class="led-track"><span class="led-text">Real-Time Pricing &mdash; Updated Automatically&ensp;&ensp;|&ensp;&ensp;Zero Manual Tags &mdash; Zero Pricing Errors&ensp;&ensp;|&ensp;&ensp;Every Shelf Is Now a Revenue Channel&ensp;&ensp;|&ensp;&ensp;Retail Lumina &mdash; Control the Shelf</span></div>
-        </div>
-
-        <!-- Subtle glow effects -->
-        <div class="led-glow led-glow-1"></div>
-        <div class="led-glow led-glow-2"></div>
-        <div class="led-glow led-glow-3"></div>
+        <div class="shelf-scroll-hint"><span>Scroll to see it in action</span></div>
       </div>
-      <div class="shelf-scroll-hint"><span>Scroll to see it in action</span></div>
-    </div>
     </div><!-- /hero-layout -->
   </section>
 
@@ -1750,15 +1627,37 @@
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
 
-    // Shelf hint fade on scroll
+    // Scroll-driven shelf video scrubbing
+    const shelfVideo = document.getElementById('shelfVideo');
     const shelfScene = document.getElementById('shelfScene');
-    if (shelfScene) {
-      window.addEventListener('scroll', () => {
-        const rect = shelfScene.getBoundingClientRect();
-        const progress = Math.max(0, Math.min(1, (window.innerHeight * 0.8 - rect.top) / (window.innerHeight * 0.5)));
+    if (shelfVideo && shelfScene) {
+      shelfVideo.pause();
+      shelfVideo.currentTime = 0;
+
+      const initScrollScrub = () => {
+        const duration = shelfVideo.duration;
+        if (!duration || isNaN(duration)) return;
         const hint = shelfScene.querySelector('.shelf-scroll-hint');
-        if (hint) hint.style.opacity = Math.max(0, 0.6 - progress * 2);
-      }, { passive: true });
+
+        const updateVideo = () => {
+          // Map scroll from 0 to the bottom of the shelf scene leaving the viewport
+          const sceneTop = shelfScene.offsetTop;
+          const sceneHeight = shelfScene.offsetHeight;
+          const scrollEnd = sceneTop + sceneHeight;
+          const progress = Math.max(0, Math.min(1, window.scrollY / scrollEnd));
+          shelfVideo.currentTime = progress * duration;
+          if (hint) hint.style.opacity = Math.max(0, 0.6 - progress * 3);
+        };
+
+        window.addEventListener('scroll', updateVideo, { passive: true });
+        updateVideo();
+      };
+
+      if (shelfVideo.readyState >= 1) {
+        initScrollScrub();
+      } else {
+        shelfVideo.addEventListener('loadedmetadata', initScrollScrub);
+      }
     }
 
     // Mobile nav toggle
