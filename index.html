@@ -752,126 +752,6 @@
       line-height: 1.65;
     }
 
-    /* ========== PRODUCT CAROUSEL ========== */
-    .carousel {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      background: var(--black-mid);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .carousel-track {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 10;
-    }
-
-    .carousel-slide {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      transform: scale(0.97);
-      pointer-events: none;
-    }
-
-    .carousel-slide.active {
-      opacity: 1;
-      transform: scale(1);
-      pointer-events: auto;
-    }
-
-    .carousel-slide img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      padding: 32px;
-    }
-
-    .carousel-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 24px 32px;
-      background: linear-gradient(0deg, rgba(10,10,10,0.85) 0%, transparent 100%);
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.7);
-    }
-
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(10,10,10,0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: var(--white);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all var(--transition);
-      z-index: 3;
-    }
-
-    .carousel-btn:hover {
-      background: rgba(255,255,255,0.15);
-      border-color: rgba(255,255,255,0.3);
-      transform: translateY(-50%) scale(1.08);
-    }
-
-    .carousel-prev { left: 16px; }
-    .carousel-next { right: 16px; }
-
-    .carousel-dots {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      z-index: 3;
-    }
-
-    .carousel-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      border: none;
-      background: rgba(255,255,255,0.25);
-      cursor: pointer;
-      transition: all var(--transition);
-      padding: 0;
-    }
-
-    .carousel-dot.active {
-      background: var(--white);
-      transform: scale(1.3);
-    }
-
-    .carousel-dot:hover {
-      background: rgba(255,255,255,0.6);
-    }
-
-    @media (max-width: 768px) {
-      .carousel-track { aspect-ratio: 4 / 3; }
-      .carousel-slide img { padding: 16px; }
-      .carousel-btn { width: 40px; height: 40px; }
-      .carousel-prev { left: 10px; }
-      .carousel-next { right: 10px; }
-      .carousel-caption { padding: 16px 20px; font-size: 0.82rem; }
-    }
-
     /* ========== SEGMENTS ========== */
     .segments-grid {
       display: grid;
@@ -1480,6 +1360,20 @@
 
       .hero-ctas .btn { width: 100%; }
     }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
   </style>
 
   <!-- Analytics — replace G-XXXXXXXXXX with your GA4 measurement ID -->
@@ -1664,88 +1558,31 @@
   <!-- PRODUCT SHOWCASE -->
   <section class="section section-dark" id="product">
     <div class="section-inner">
-      <div class="reveal">
-        <div class="section-eyebrow">The Product</div>
-        <h2>What it looks like in your&nbsp;store.</h2>
-        <p class="section-lead">Shelf-edge LED displays mount directly onto standard gondola shelving. Vibrant, high-resolution screens replace paper tags and bring every shelf to life &mdash; with pricing, promotions, and brand content you control from a single platform.</p>
-      </div>
-
-      <div class="carousel reveal" id="productCarousel">
-        <div class="carousel-track">
-          <div class="carousel-slide active">
-            <img src="images/gondola-purple.jpeg" alt="Multi-shelf deployment with horizontal and vertical display orientations" loading="lazy" width="520" height="377">
-            <div class="carousel-caption">Multi-shelf deployment with horizontal and vertical display orientations</div>
-          </div>
-          <div class="carousel-slide">
-            <img src="images/hardware-unit.jpeg" alt="Commercial-grade LED display with integrated mounting system" loading="lazy" width="1206" height="1014">
-            <div class="carousel-caption">Commercial-grade LED display with integrated mounting</div>
-          </div>
-          <div class="carousel-slide">
-            <img src="images/gondola-colorful.jpg" alt="Shelf-edge displays with vibrant digital content on gondola shelving" loading="lazy" width="447" height="447">
-            <div class="carousel-caption">Vibrant shelf-edge content across standard gondola shelving</div>
-          </div>
-          <div class="carousel-slide">
-            <img src="images/gondola-double.jpg" alt="Double-sided gondola shelving with LED shelf-edge displays" loading="lazy" width="300" height="300">
-            <div class="carousel-caption">Full gondola deployment across a standard retail aisle</div>
-          </div>
-          <div class="carousel-slide">
-            <img src="images/gondola-hero.jpeg" alt="Retail Lumina shelf-edge display system with header screen" loading="lazy" width="456" height="645">
-            <div class="carousel-caption">Shelf-edge system with integrated header display</div>
-          </div>
-          <div class="carousel-slide">
-            <img src="images/cocacola-strip.jpeg" alt="Brand content displayed on a shelf-edge LED strip" loading="lazy" width="180" height="358">
-            <div class="carousel-caption">Real brand content on shelf-edge LED media</div>
-          </div>
+      <div class="product-grid">
+        <div class="reveal">
+          <div class="section-eyebrow">The Product & In Action</div>
+          <h2>What it looks like in your&nbsp;store.</h2>
+          <p class="section-lead">Shelf-edge LED displays mount directly onto standard gondola shelving. Vibrant, high-resolution screens replace paper tags and bring every shelf to life &mdash; with pricing, promotions, and brand content you control from a single platform.</p>
         </div>
-        <button class="carousel-btn carousel-prev" aria-label="Previous image">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="carousel-btn carousel-next" aria-label="Next image">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
-        </button>
-        <div class="carousel-dots">
-          <button class="carousel-dot active" aria-label="Slide 1"></button>
-          <button class="carousel-dot" aria-label="Slide 2"></button>
-          <button class="carousel-dot" aria-label="Slide 3"></button>
-          <button class="carousel-dot" aria-label="Slide 4"></button>
-          <button class="carousel-dot" aria-label="Slide 5"></button>
-          <button class="carousel-dot" aria-label="Slide 6"></button>
-        </div>
-      </div>
 
-      <div class="reveal" style="text-align: center; margin-top: 48px;">
-        <a href="#contact" class="btn btn-white btn-arrow">Get a Demo </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- INSTAGRAM VIDEO -->
-  <section class="section section-light ig-video-section" id="in-action">
-    <div class="section-inner">
-      <div class="reveal" style="text-align: center; margin-bottom: 48px;">
-        <div class="section-eyebrow" style="justify-content: center;">See It Live</div>
-        <h2>The shelf, reimagined.</h2>
-        <p class="section-lead" style="margin-left: auto; margin-right: auto;">Watch Retail Lumina in action — vibrant, dynamic, and impossible to ignore.</p>
-      </div>
-
-      <div class="ig-card reveal">
-        <div class="ig-header">
-          <div class="ig-avatar">RL</div>
-          <div class="ig-username">retaillumina</div>
-        </div>
-        <div class="ig-video-wrap">
-          <video autoplay muted loop playsinline preload="metadata" poster="images/video-poster.jpg">
-            <source src="videos/retail-demo.webm" type="video/webm">
-            <source src="videos/retail-demo.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="ig-footer">
-          <div class="ig-actions">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+        <div class="ig-card reveal">
+          <div class="ig-header">
+            <div class="ig-avatar">RL</div>
+            <div class="ig-username">retaillumina</div>
           </div>
-          <div class="ig-caption"><strong>retaillumina</strong> Shelf-edge displays that sell. Real-time pricing, instant promotions, and brand media — all from one platform.</div>
+          <div class="ig-video-wrap">
+            <video autoplay muted loop playsinline>
+              <source src="videos/retail-demo.mov" type="video/mp4">
+            </video>
+          </div>
+          <div class="ig-footer">
+            <div class="ig-actions">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+            </div>
+            <div class="ig-caption"><strong>retaillumina</strong> Shelf-edge displays that sell. Real-time pricing, instant promotions, and brand media — all from one platform.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1988,47 +1825,6 @@
     }, { threshold: 0.5 });
 
     statNumbers.forEach(el => statObserver.observe(el));
-
-    // Product carousel
-    const carousel = document.getElementById('productCarousel');
-    if (carousel) {
-      const slides = carousel.querySelectorAll('.carousel-slide');
-      const dots = carousel.querySelectorAll('.carousel-dot');
-      const prevBtn = carousel.querySelector('.carousel-prev');
-      const nextBtn = carousel.querySelector('.carousel-next');
-      let current = 0;
-
-      function goTo(index) {
-        slides[current].classList.remove('active');
-        dots[current].classList.remove('active');
-        current = (index + slides.length) % slides.length;
-        slides[current].classList.add('active');
-        dots[current].classList.add('active');
-      }
-
-      prevBtn.addEventListener('click', () => goTo(current - 1));
-      nextBtn.addEventListener('click', () => goTo(current + 1));
-      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
-
-      // Keyboard navigation
-      carousel.setAttribute('tabindex', '0');
-      carousel.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') goTo(current - 1);
-        if (e.key === 'ArrowRight') goTo(current + 1);
-      });
-
-      // Touch/swipe support
-      let touchStartX = 0;
-      carousel.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-      }, { passive: true });
-      carousel.addEventListener('touchend', (e) => {
-        const diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-          diff > 0 ? goTo(current + 1) : goTo(current - 1);
-        }
-      }, { passive: true });
-    }
 
     // Form submission via Formspree
     document.getElementById('consultForm').addEventListener('submit', async function(e) {
