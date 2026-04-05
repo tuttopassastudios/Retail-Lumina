@@ -255,6 +255,7 @@
     .hero-scroll-container {
       position: relative;
       height: 250vh; /* extra scroll room for video scrubbing */
+      background: var(--gradient-light);
     }
 
     /* ========== HERO ========== */
@@ -262,7 +263,7 @@
       position: sticky;
       top: 0;
       min-height: 100vh;
-      background: var(--white);
+      background: var(--gradient-light);
       overflow: hidden;
       padding: 120px 24px 48px;
       display: flex;
@@ -488,13 +489,7 @@
       color: var(--white);
     }
 
-    /* Grain texture overlay */
-    .hero,
-    .section-light,
-    .section-soft,
-    .cta-section {
-      position: relative;
-    }
+    /* Grain texture overlay — positioned via their own rules (sticky/relative) */
 
     .hero::after,
     .section-light::after,
@@ -1603,6 +1598,14 @@
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
 
+    // Smooth scroll for nav links (replaces CSS scroll-behavior)
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+
     // Scroll-driven shelf video scrubbing (pinned hero)
     const shelfVideo = document.getElementById('shelfVideo');
     const heroContainer = document.getElementById('heroScrollContainer');
@@ -1660,7 +1663,33 @@
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-    animatedEls.forEach(el => observer.observe(el));
+    // For stacking sections, observe each section and reveal its children when it becomes active
+    const snapSections = document.querySelector('.snap-sections');
+    if (snapSections) {
+      const sections = snapSections.querySelectorAll(':scope > section');
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Reveal all animated children inside this section
+            entry.target.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-children').forEach(el => {
+              el.classList.add('visible');
+            });
+            sectionObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+
+      sections.forEach(section => sectionObserver.observe(section));
+
+      // Don't double-observe elements inside snap-sections with the basic observer
+      animatedEls.forEach(el => {
+        if (!el.closest('.snap-sections')) {
+          observer.observe(el);
+        }
+      });
+    } else {
+      animatedEls.forEach(el => observer.observe(el));
+    }
 
     // Hero image float after load
     const heroImg = document.querySelector('.hero-image');
