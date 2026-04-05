@@ -91,7 +91,7 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    html { -webkit-font-smoothing: antialiased; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -251,13 +251,43 @@
       transform: translateX(3px);
     }
 
+    /* ========== HERO SCROLL CONTAINER ========== */
+    .hero-scroll-container {
+      position: relative;
+      height: 250vh; /* extra scroll room for video scrubbing */
+    }
+
     /* ========== HERO ========== */
     .hero {
-      position: relative;
-      min-height: auto;
-      background: var(--gradient-light);
+      position: sticky;
+      top: 0;
+      min-height: 100vh;
+      background: var(--white);
       overflow: hidden;
       padding: 120px 24px 48px;
+      display: flex;
+      align-items: center;
+      z-index: 1;
+    }
+
+    /* ========== STACKING SECTIONS ========== */
+    .snap-sections {
+      position: relative;
+      z-index: 2;
+    }
+
+    .snap-sections > section {
+      position: sticky;
+      top: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 -20px 60px rgba(0,0,0,0.15);
+    }
+
+    .snap-sections > section > .section-inner {
+      width: 100%;
     }
 
     .hero-layout {
@@ -1327,7 +1357,8 @@
     </button>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO (pinned while video scrubs) -->
+  <div class="hero-scroll-container" id="heroScrollContainer">
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grid-line h1"></div>
@@ -1362,7 +1393,9 @@
       </div>
     </div><!-- /hero-layout -->
   </section>
+  </div><!-- /hero-scroll-container -->
 
+  <div class="snap-sections">
   <!-- HOW IT WORKS -->
   <section class="section section-soft" id="how-it-works">
     <div class="section-inner">
@@ -1551,6 +1584,8 @@
   </section>
 
   <!-- FOOTER -->
+  </div><!-- /snap-sections -->
+
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">Retail <span>Lumina</span></div>
@@ -1568,24 +1603,23 @@
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
 
-    // Scroll-driven shelf video scrubbing
+    // Scroll-driven shelf video scrubbing (pinned hero)
     const shelfVideo = document.getElementById('shelfVideo');
-    const shelfScene = document.getElementById('shelfScene');
-    if (shelfVideo && shelfScene) {
+    const heroContainer = document.getElementById('heroScrollContainer');
+    if (shelfVideo && heroContainer) {
       shelfVideo.pause();
       shelfVideo.currentTime = 0;
 
       const initScrollScrub = () => {
         const duration = shelfVideo.duration;
         if (!duration || isNaN(duration)) return;
-        const hint = shelfScene.querySelector('.shelf-scroll-hint');
+        const hint = heroContainer.querySelector('.shelf-scroll-hint');
 
         const updateVideo = () => {
-          // Map scroll from 0 to the bottom of the shelf scene leaving the viewport
-          const sceneTop = shelfScene.offsetTop;
-          const sceneHeight = shelfScene.offsetHeight;
-          const scrollEnd = sceneTop + sceneHeight;
-          const progress = Math.max(0, Math.min(1, window.scrollY / scrollEnd));
+          const containerTop = heroContainer.offsetTop;
+          const scrollRoom = heroContainer.offsetHeight - window.innerHeight;
+          const scrolled = window.scrollY - containerTop;
+          const progress = Math.max(0, Math.min(1, scrolled / scrollRoom));
           shelfVideo.currentTime = progress * duration;
           if (hint) hint.style.opacity = Math.max(0, 0.6 - progress * 3);
         };
