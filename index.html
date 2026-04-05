@@ -291,6 +291,69 @@
       width: 100%;
     }
 
+    /* ========== FILING CABINET TABS ========== */
+    .snap-sections > section:nth-child(1) { top: 72px; z-index: 2; }
+    .snap-sections > section:nth-child(2) { top: 104px; z-index: 3; }
+    .snap-sections > section:nth-child(3) { top: 136px; z-index: 4; }
+    .snap-sections > section:nth-child(4) { top: 168px; z-index: 5; }
+    .snap-sections > section:nth-child(5) { top: 200px; z-index: 6; }
+
+    .section-tab {
+      position: absolute;
+      top: 0;
+      height: 32px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      z-index: 10;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      transition: all var(--transition);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .section-tab:hover {
+      filter: brightness(1.2);
+    }
+
+    .section-soft .section-tab {
+      background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+      border-bottom-color: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.55);
+    }
+
+    .section-light .section-tab {
+      background: linear-gradient(180deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.08) 100%);
+      border-bottom-color: rgba(0,0,0,0.12);
+      color: var(--text-muted);
+    }
+
+    .cta-section .section-tab {
+      background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+      border-bottom-color: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.55);
+    }
+
+    .section-tab.active {
+      font-weight: 800;
+    }
+
+    .section-soft .section-tab.active { color: rgba(255,255,255,0.9); }
+    .section-light .section-tab.active { color: var(--text-primary); }
+    .cta-section .section-tab.active { color: rgba(255,255,255,0.9); }
+
+    /* Stagger horizontal position for filing cabinet effect */
+    .snap-sections > section:nth-child(1) .section-tab { left: 24px; }
+    .snap-sections > section:nth-child(2) .section-tab { left: 54px; }
+    .snap-sections > section:nth-child(3) .section-tab { left: 84px; }
+    .snap-sections > section:nth-child(4) .section-tab { left: 114px; }
+    .snap-sections > section:nth-child(5) .section-tab { left: 144px; }
+
     .hero-layout {
       display: flex;
       align-items: center;
@@ -525,9 +588,11 @@
     }
 
     .section-dark .section-eyebrow,
-    .section-soft .section-eyebrow { color: rgba(255,255,255,0.5); }
+    .section-soft .section-eyebrow,
+    .cta-section .section-eyebrow { color: rgba(255,255,255,0.5); }
     .section-dark .section-eyebrow::before,
-    .section-soft .section-eyebrow::before { background: rgba(255,255,255,0.4); }
+    .section-soft .section-eyebrow::before,
+    .cta-section .section-eyebrow::before { background: rgba(255,255,255,0.4); }
 
     h2 {
       font-size: clamp(1.8rem, 3vw, 2.6rem);
@@ -873,6 +938,7 @@
       position: relative;
       width: 100%;
       aspect-ratio: 9 / 16;
+      max-height: 480px;
       background: var(--black);
     }
 
@@ -919,7 +985,8 @@
 
     /* ========== CTA SECTION ========== */
     .cta-section {
-      background: var(--gradient-light);
+      background: var(--gradient-dark);
+      color: var(--white);
       position: relative;
       overflow: hidden;
     }
@@ -932,7 +999,7 @@
     }
 
     .cta-inner h2 {
-      color: var(--text-primary);
+      color: var(--white);
       margin-bottom: 16px;
     }
 
@@ -940,6 +1007,7 @@
       margin-left: auto;
       margin-right: auto;
       margin-bottom: 48px;
+      color: rgba(255,255,255,0.55);
     }
 
     .form-grid {
@@ -961,7 +1029,7 @@
     .form-group label {
       font-size: 0.8rem;
       font-weight: 600;
-      color: var(--text-secondary);
+      color: rgba(255,255,255,0.5);
       margin-bottom: 6px;
       letter-spacing: 0.02em;
     }
@@ -973,23 +1041,23 @@
       font-size: 0.95rem;
       padding: 14px 16px;
       border-radius: var(--radius-sm);
-      border: 1px solid rgba(0,0,0,0.12);
-      background: rgba(255,255,255,0.6);
-      color: var(--text-primary);
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
       transition: var(--transition);
       outline: none;
     }
 
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-      color: var(--gray-400);
+      color: rgba(255,255,255,0.35);
     }
 
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
-      border-color: rgba(0,0,0,0.3);
-      background: rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.12);
     }
 
     .form-group select {
@@ -1264,6 +1332,9 @@
     @media (max-width: 768px) {
       .section { padding: 72px 20px; }
 
+      .section-tab { display: none; }
+      .snap-sections > section { top: 0 !important; z-index: 2 !important; }
+
       .nav-links { display: none; }
       .nav-links.open {
         display: flex;
@@ -1394,6 +1465,7 @@
   <div class="snap-sections">
   <!-- HOW IT WORKS -->
   <section class="section section-soft" id="how-it-works">
+    <div class="section-tab" data-target="how-it-works">How It Works</div>
     <div class="section-inner">
       <div class="reveal-left" style="text-align: center; margin-bottom: 48px;">
         <div class="section-eyebrow" style="justify-content: center;">How It Works</div>
@@ -1418,13 +1490,19 @@
           <p>Turn your shelf edges into brand media inventory. Give CPG and brand partners a way to advertise at the point of purchase &mdash; and generate incremental revenue from space you already own.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="product-demo reveal-left" style="margin-top: 48px;">
+  <!-- SEE IT IN ACTION -->
+  <section class="section section-light" id="see-it-in-action">
+    <div class="section-tab" data-target="see-it-in-action">See It In Action</div>
+    <div class="section-inner">
+      <div class="product-demo reveal-left">
         <div class="product-demo-layout">
           <div class="reveal-left">
-            <h3 style="font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px;">See it in action.</h3>
-            <p style="font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 24px;">Shelf-edge LED displays mount onto standard gondola shelving. Vibrant screens replace paper tags &mdash; with pricing, promotions, and brand content you control from one&nbsp;platform.</p>
-            <a href="#contact" class="btn btn-outline-dark btn-arrow">See It In Your Store </a>
+            <h3 style="font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; color: var(--text-primary);">See it in action.</h3>
+            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px;">Shelf-edge LED displays mount onto standard gondola shelving. Vibrant screens replace paper tags &mdash; with pricing, promotions, and brand content you control from one&nbsp;platform.</p>
+            <a href="#contact" class="btn btn-secondary btn-arrow">See It In Your Store </a>
           </div>
 
           <div class="ig-card reveal-left">
@@ -1452,7 +1530,8 @@
   </section>
 
   <!-- WHO IT'S FOR -->
-  <section class="section section-light" id="segments">
+  <section class="section section-soft" id="segments">
+    <div class="section-tab" data-target="segments">Who It's For</div>
     <div class="section-inner">
       <div class="reveal-left" style="text-align: center; margin-bottom: 48px;">
         <div class="section-eyebrow" style="justify-content: center;">Who It's For</div>
@@ -1493,7 +1572,8 @@
   </section>
 
   <!-- WHY NOW -->
-  <section class="section section-soft" id="why-now">
+  <section class="section section-light" id="why-now">
+    <div class="section-tab" data-target="why-now">Why Now</div>
     <div class="section-inner">
       <div class="reveal-left" style="text-align: center;">
         <div class="section-eyebrow" style="justify-content: center;">Why Now</div>
@@ -1521,6 +1601,7 @@
 
   <!-- CTA / CONSULTATION -->
   <section class="section cta-section" id="contact">
+    <div class="section-tab" data-target="contact">Get Started</div>
     <div class="section-inner">
       <div class="cta-inner reveal-left">
         <div class="section-eyebrow" style="justify-content: center;">Get Started</div>
@@ -1734,6 +1815,40 @@
     }, { threshold: 0.5 });
 
     statNumbers.forEach(el => statObserver.observe(el));
+
+    // Filing cabinet tab click navigation
+    // Cache each section's natural document offset before sticky kicks in
+    const tabSectionOffsets = new Map();
+    function cacheOffsets() {
+      document.querySelectorAll('.snap-sections > section[id]').forEach(sec => {
+        let top = 0, el = sec;
+        while (el) { top += el.offsetTop; el = el.offsetParent; }
+        tabSectionOffsets.set(sec.id, top);
+      });
+    }
+    cacheOffsets();
+    window.addEventListener('resize', cacheOffsets);
+
+    document.querySelectorAll('.section-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const id = tab.dataset.target;
+        const offset = tabSectionOffsets.get(id);
+        if (offset !== undefined) {
+          window.scrollTo({ top: offset, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Active tab tracking based on scroll position
+    const sectionTabs = document.querySelectorAll('.section-tab');
+    const tabSections = document.querySelectorAll('.snap-sections > section');
+    const tabObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const tab = entry.target.querySelector('.section-tab');
+        if (tab) tab.classList.toggle('active', entry.isIntersecting);
+      });
+    }, { threshold: 0.4 });
+    tabSections.forEach(s => tabObserver.observe(s));
 
     // Form submission via Formspree
     document.getElementById('consultForm').addEventListener('submit', async function(e) {
