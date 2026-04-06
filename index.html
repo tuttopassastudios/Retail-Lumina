@@ -50,7 +50,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
   <!-- Preload shelf scroll video -->
-  <link rel="preload" as="video" href="videos/shelf-scroll.webm">
+  <link rel="preload" as="video" href="videos/shelf-scroll-alpha.mov">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -422,7 +422,7 @@
     .shelf-video-wrap video {
       width: 100%;
       display: block;
-      mix-blend-mode: multiply;
+      background: transparent;
     }
 
     @media (max-width: 768px) {
@@ -1467,9 +1467,9 @@
       <!-- Shelf Display — looping video -->
       <div class="shelf-scene" id="shelfScene">
         <div class="shelf-video-wrap">
-          <video id="shelfVideo" muted playsinline preload="auto">
-            <source src="videos/shelf-scroll.webm" type="video/webm">
+          <video id="shelfVideo" muted playsinline preload="auto" style="background:transparent">
             <source src="videos/shelf-scroll-alpha.mov" type='video/quicktime; codecs="hvc1"'>
+            <source src="videos/shelf-scroll.webm" type="video/webm">
             <source src="videos/shelf-scroll.mp4" type="video/mp4">
           </video>
         </div>
