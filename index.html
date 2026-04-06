@@ -242,6 +242,22 @@
       border-radius: 10px;
     }
 
+    .btn-action-solid {
+      padding: 12px 28px;
+      background: var(--white);
+      color: var(--black);
+      border: 1px solid var(--gray-300);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .btn-action-solid:hover {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
     .btn-arrow::after {
       content: '\2192';
       transition: transform var(--transition);
@@ -262,88 +278,10 @@
       z-index: 1;
     }
 
-    /* ========== STACKING SECTIONS ========== */
+    /* ========== SECTIONS WRAPPER ========== */
     .snap-sections {
       position: relative;
-      z-index: 2;
     }
-
-    .snap-sections > section {
-      position: sticky;
-      top: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 -20px 60px rgba(0,0,0,0.15);
-    }
-
-    .snap-sections > section > .section-inner {
-      width: 100%;
-    }
-
-    /* ========== FILING CABINET TABS ========== */
-    .snap-sections > section:nth-child(1) { top: 72px; z-index: 2; }
-    .snap-sections > section:nth-child(2) { top: 104px; z-index: 3; }
-    .snap-sections > section:nth-child(3) { top: 136px; z-index: 4; }
-    .snap-sections > section:nth-child(4) { top: 168px; z-index: 5; }
-    .snap-sections > section:nth-child(5) { top: 200px; z-index: 6; }
-
-    .section-tab {
-      position: absolute;
-      top: 0;
-      height: 32px;
-      padding: 0 20px;
-      display: flex;
-      align-items: center;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      cursor: pointer;
-      z-index: 10;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-      transition: all var(--transition);
-      white-space: nowrap;
-      user-select: none;
-    }
-
-    .section-tab:hover {
-      filter: brightness(1.2);
-    }
-
-    .section-soft .section-tab {
-      background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
-      border-bottom-color: rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.55);
-    }
-
-    .section-light .section-tab {
-      background: linear-gradient(180deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.08) 100%);
-      border-bottom-color: rgba(0,0,0,0.12);
-      color: var(--text-muted);
-    }
-
-    .cta-section .section-tab {
-      background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
-      border-bottom-color: rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.55);
-    }
-
-    .section-tab.active {
-      font-weight: 800;
-    }
-
-    .section-soft .section-tab.active { color: rgba(255,255,255,0.9); }
-    .section-light .section-tab.active { color: var(--text-primary); }
-    .cta-section .section-tab.active { color: rgba(255,255,255,0.9); }
-
-    /* Stagger horizontal position for filing cabinet effect */
-    .snap-sections > section:nth-child(1) .section-tab { left: 24px; }
-    .snap-sections > section:nth-child(2) .section-tab { left: 54px; }
-    .snap-sections > section:nth-child(3) .section-tab { left: 84px; }
-    .snap-sections > section:nth-child(4) .section-tab { left: 114px; }
-    .snap-sections > section:nth-child(5) .section-tab { left: 144px; }
 
     .hero-layout {
       display: flex;
@@ -468,9 +406,9 @@
     /* ========== SHELF VIDEO ========== */
     .shelf-scene {
       width: 100%;
-      flex: 1;
+      flex: 1.5;
       min-width: 0;
-      max-width: 500px;
+      max-width: 900px;
       margin: 0;
       position: relative;
       z-index: 2;
@@ -479,11 +417,6 @@
 
     .shelf-video-wrap {
       position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow:
-        0 25px 60px rgba(0,0,0,0.18),
-        0 8px 20px rgba(0,0,0,0.08);
     }
 
     .shelf-video-wrap video {
@@ -738,6 +671,9 @@
       color: var(--text-secondary);
       line-height: 1.65;
     }
+
+    .pillar .mobile-desc { display: none; }
+    .pillar .desktop-desc { display: block; }
 
     /* ========== SEGMENTS ========== */
     .segments-grid {
@@ -1351,7 +1287,7 @@
       .hero-inner { text-align: center; }
       .hero-ctas { justify-content: center; }
       .hero-sub { margin-left: auto; margin-right: auto; }
-      .shelf-scene { max-width: 420px; }
+      .shelf-scene { max-width: 600px; }
 
       .solution-content,
       .brands-content {
@@ -1367,9 +1303,6 @@
 
     @media (max-width: 768px) {
       .section { padding: 72px 20px; }
-
-      .section-tab { display: none; }
-      .snap-sections > section { top: 0 !important; z-index: 2 !important; }
 
       .nav-links { display: none; }
       .nav-links.open {
@@ -1387,14 +1320,39 @@
 
       .nav-toggle { display: block; }
 
-      .hero { min-height: auto; padding: 120px 20px 64px; }
+      .hero { min-height: auto; padding: 100px 20px 40px; }
       .hero h1 { font-size: 2rem; }
+      .hero-sub { font-size: 1rem; margin-bottom: 12px; }
+      .hero-segments { margin-bottom: 28px; }
+      .shelf-scene { max-width: 85%; margin: 16px auto 0; }
+
+      .section { padding: 60px 20px; }
+
+      .product-demo-layout { gap: 20px; }
+      .product-demo-layout h3 { font-size: 1.15rem !important; }
+      .product-demo-layout p { margin-bottom: 16px !important; }
+
+      .ig-card { max-width: 340px; }
 
       .problem-grid { grid-template-columns: 1fr; }
-      .pillars-grid { grid-template-columns: 1fr; }
-      .segments-grid { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: 1fr; gap: 12px; }
+      .pillar { padding: 24px 20px; }
+      .pillar-number { font-size: 0.7rem; margin-bottom: 12px; }
+      .pillar h3 { font-size: 1.05rem; margin-bottom: 8px; }
+      .pillar p { font-size: 0.85rem; line-height: 1.55; }
+      .pillar .mobile-desc { display: block; }
+      .pillar .desktop-desc { display: none; }
+      .segments-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .segment { padding: 20px 16px; }
+      .segment-icon { width: 36px; height: 36px; margin-bottom: 14px; }
+      .segment-icon svg { width: 18px; height: 18px; }
+      .segment h3 { font-size: 0.95rem; margin-bottom: 8px; }
+      .segment p { font-size: 0.8rem; line-height: 1.5; }
       .form-grid { grid-template-columns: 1fr; }
       .form-group.full { grid-column: span 1; }
+
+      .stats-row { gap: 16px; }
+      .stat { padding: 28px 20px; }
 
       .footer-inner {
         flex-direction: column;
@@ -1478,7 +1436,6 @@
           <p class="hero-segments">Built for convenience, grocery, and modern retail.</p>
           <div class="hero-ctas">
             <a href="#contact" class="btn btn-primary btn-large btn-arrow">Request a Consultation </a>
-            <a href="#how-it-works" class="btn btn-secondary btn-large">See How It Works</a>
           </div>
         </div>
       </div>
@@ -1498,7 +1455,7 @@
   <div class="snap-sections">
   <!-- HOW IT WORKS -->
   <section class="section section-soft" id="how-it-works">
-    <div class="section-tab" data-target="how-it-works">How It Works</div>
+
     <div class="section-inner">
       <div class="reveal-left" style="text-align: center; margin-bottom: 48px;">
         <div class="section-eyebrow" style="justify-content: center;">How It Works</div>
@@ -1509,18 +1466,21 @@
       <div class="pillars-grid stagger-children">
         <div class="pillar">
           <div class="pillar-number">01</div>
-          <h3>Price</h3>
-          <p>Update pricing in real time across your store or your entire network. No more paper tags. No more labor waste. No more discrepancies between your POS and your shelf.</p>
+          <h3>Real-Time Pricing</h3>
+          <p class="desktop-desc">Update pricing in real time across your store or your entire network. No more paper tags. No more labor waste. No more discrepancies between your POS and your shelf.</p>
+          <p class="mobile-desc">Update pricing instantly across your entire network. No paper tags, no labor waste.</p>
         </div>
         <div class="pillar">
           <div class="pillar-number">02</div>
-          <h3>Promote</h3>
-          <p>Push promotions, cross-sells, seasonal campaigns, and high-margin item highlights directly to the shelf &mdash; where the purchase decision is actually being made.</p>
+          <h3>Engaging Promotions</h3>
+          <p class="desktop-desc">Push promotions, cross-sells, seasonal campaigns, and high-margin item highlights directly to the shelf &mdash; where the purchase decision is actually being made.</p>
+          <p class="mobile-desc">Push promotions and campaigns directly to the shelf &mdash; right where decisions are made.</p>
         </div>
         <div class="pillar">
           <div class="pillar-number">03</div>
-          <h3>Monetize</h3>
-          <p>Turn your shelf edges into brand media inventory. Give CPG and brand partners a way to advertise at the point of purchase &mdash; and generate incremental revenue from space you already own.</p>
+          <h3>Brand Monetizations</h3>
+          <p class="desktop-desc">Turn your shelf edges into brand media inventory. Give CPG and brand partners a way to advertise at the point of purchase &mdash; and generate incremental revenue from space you already own.</p>
+          <p class="mobile-desc">Turn shelf edges into sellable brand media &mdash; new revenue from space you already own.</p>
         </div>
       </div>
     </div>
@@ -1528,14 +1488,14 @@
 
   <!-- SEE IT IN ACTION -->
   <section class="section section-light" id="see-it-in-action">
-    <div class="section-tab" data-target="see-it-in-action">See It In Action</div>
+
     <div class="section-inner">
       <div class="product-demo reveal-left">
         <div class="product-demo-layout">
           <div class="reveal-left">
             <h3 style="font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; color: var(--text-primary);">See it in action.</h3>
-            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px;">Shelf-edge LED displays mount onto standard gondola shelving. Vibrant screens replace paper tags &mdash; with pricing, promotions, and brand content you control from one&nbsp;platform.</p>
-            <a href="#contact" class="btn btn-secondary btn-arrow">See It In Your Store </a>
+            <p style="font-size: 0.95rem; color: var(--text-primary); line-height: 1.65; margin-bottom: 24px;">Shelf-edge LED displays mount onto standard gondola shelving. Vibrant screens replace paper tags &mdash; with pricing, promotions, and brand content you control from one&nbsp;platform.</p>
+            <a href="#contact" class="btn btn-action-solid btn-arrow">See It In Your Store </a>
           </div>
 
           <div class="ig-card reveal-left">
@@ -1564,7 +1524,7 @@
 
   <!-- WHO IT'S FOR -->
   <section class="section section-soft" id="segments">
-    <div class="section-tab" data-target="segments">Who It's For</div>
+
     <div class="section-inner">
       <div class="reveal-left" style="text-align: center; margin-bottom: 48px;">
         <div class="section-eyebrow" style="justify-content: center;">Who It's For</div>
@@ -1606,7 +1566,7 @@
 
   <!-- WHY NOW -->
   <section class="section section-light" id="why-now">
-    <div class="section-tab" data-target="why-now">Why Now</div>
+
     <div class="section-inner">
       <div class="reveal-left" style="text-align: center;">
         <div class="section-eyebrow" style="justify-content: center;">Why Now</div>
@@ -1634,7 +1594,7 @@
 
   <!-- CTA / CONSULTATION -->
   <section class="section cta-section" id="contact">
-    <div class="section-tab" data-target="contact">Get Started</div>
+
     <div class="section-inner">
       <div class="cta-inner reveal-left">
         <div class="section-eyebrow" style="justify-content: center;">Get Started</div>
