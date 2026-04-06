@@ -422,15 +422,17 @@
     .shelf-video-wrap video {
       width: 100%;
       display: block;
+      border-radius: 12px;
+    }
+
+    @media (max-width: 1024px) {
+      .shelf-video-wrap video {
+        mix-blend-mode: multiply;
+      }
     }
 
     @media (max-width: 768px) {
       .shelf-scene { max-width: 100%; margin-top: 32px; }
-      .shelf-video-wrap { overflow: hidden; }
-      .shelf-video-wrap video {
-        transform: scale(1.35);
-        transform-origin: center center;
-      }
     }
 
     /* ========== SECTIONS ========== */
