@@ -1096,6 +1096,20 @@
 
     .footer-contact a:hover { color: var(--white); }
 
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
     /* ========== SCROLL OFFSET FOR FIXED NAV ========== */
     [id] {
       scroll-margin-top: 88px;
@@ -1666,6 +1680,10 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">Retail <span>Lumina</span></div>
+      <div class="footer-links">
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
       <div class="footer-contact">
         <a href="mailto:support@retaillumina.com">support@retaillumina.com</a>
       </div>
