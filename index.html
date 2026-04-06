@@ -91,13 +91,18 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { -webkit-font-smoothing: antialiased; }
+    html {
+      -webkit-font-smoothing: antialiased;
+      /* Bottom overscroll color (matches footer) */
+      background-color: var(--black);
+    }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       color: var(--text-primary);
       line-height: 1.6;
-      background: var(--white);
+      /* Sage tone matches nav/hero for iOS Safari top overscroll */
+      background: #d0d4cc;
       overflow-x: hidden;
     }
 
