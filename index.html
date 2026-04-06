@@ -1617,7 +1617,7 @@
         <p class="section-lead">Request a consultation and we'll walk you through how Retail Lumina works in your&nbsp;store.</p>
 
         <div class="form-card">
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="form-grid" id="consultForm">
+        <form action="mailto:support@retaillumina.com" method="POST" enctype="text/plain" class="form-grid" id="consultForm">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <div class="form-group">
             <label for="name">Full Name</label>
@@ -1835,41 +1835,40 @@
     }, { threshold: 0.4 });
     tabSections.forEach(s => tabObserver.observe(s));
 
-    // Form submission via Formspree
-    document.getElementById('consultForm').addEventListener('submit', async function(e) {
+    // Form submission via mailto
+    document.getElementById('consultForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      const fd = new FormData(this);
+      const name = fd.get('name') || '';
+      const email = fd.get('email') || '';
+      const company = fd.get('company') || '';
+      const role = fd.get('role') || '';
+      const locations = fd.get('locations') || '';
+      const segment = fd.get('segment') || '';
+      const message = fd.get('message') || '';
+
+      const subject = encodeURIComponent('Consultation Request from ' + name);
+      const body = encodeURIComponent(
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Company: ' + company + '\n' +
+        'Role: ' + role + '\n' +
+        'Locations: ' + locations + '\n' +
+        'Retail Segment: ' + segment + '\n\n' +
+        'Message:\n' + message
+      );
+
+      window.location.href = 'mailto:support@retaillumina.com?subject=' + subject + '&body=' + body;
+
       const btn = this.querySelector('button[type="submit"]');
       const originalHTML = btn.innerHTML;
-      btn.innerHTML = 'Sending\u2026';
-      btn.disabled = true;
-
-      try {
-        const response = await fetch(this.action, {
-          method: 'POST',
-          body: new FormData(this),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (response.ok) {
-          btn.innerHTML = '\u2713 Sent \u2014 we\u2019ll be in touch shortly';
-          btn.style.background = '#16a34a';
-          this.reset();
-          setTimeout(() => {
-            btn.innerHTML = originalHTML;
-            btn.style.background = '';
-            btn.disabled = false;
-          }, 5000);
-        } else {
-          throw new Error('Submission failed');
-        }
-      } catch (err) {
-        btn.innerHTML = 'Something went wrong \u2014 try again';
-        btn.style.background = '#dc2626';
-        btn.disabled = false;
-        setTimeout(() => {
-          btn.innerHTML = originalHTML;
-          btn.style.background = '';
-        }, 4000);
-      }
+      btn.innerHTML = '\u2713 Opening your email client\u2026';
+      btn.style.background = '#16a34a';
+      this.reset();
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+      }, 4000);
     });
   </script>
 
