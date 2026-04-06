@@ -1097,6 +1097,31 @@
       width: 100%;
     }
 
+    [data-fs-success] {
+      display: none;
+      text-align: center;
+      padding: 32px 16px;
+      font-size: 1.1rem;
+      color: #16a34a;
+      font-weight: 600;
+    }
+
+    [data-fs-error] {
+      display: none;
+      text-align: center;
+      padding: 12px;
+      font-size: 0.9rem;
+      color: #dc2626;
+    }
+
+    [data-fs-error=""] { display: none; }
+
+    span[data-fs-error] {
+      text-align: left;
+      padding: 4px 0 0;
+      font-size: 0.8rem;
+    }
+
     /* ========== FOOTER ========== */
     .footer {
       background: var(--black);
@@ -1617,27 +1642,31 @@
         <p class="section-lead">Request a consultation and we'll walk you through how Retail Lumina works in your&nbsp;store.</p>
 
         <div class="form-card">
-        <form action="mailto:support@retaillumina.com" method="POST" enctype="text/plain" class="form-grid" id="consultForm">
+        <div data-fs-success>Thank you! We'll be in touch soon.</div>
+        <div data-fs-error></div>
+        <form class="form-grid" id="consultForm">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <div class="form-group">
             <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="John Smith" required>
+            <input type="text" id="name" name="name" placeholder="John Smith" required data-fs-field>
+            <span data-fs-error="name"></span>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="john@company.com" required>
+            <input type="email" id="email" name="email" placeholder="john@company.com" required data-fs-field>
+            <span data-fs-error="email"></span>
           </div>
           <div class="form-group">
             <label for="company">Company</label>
-            <input type="text" id="company" name="company" placeholder="Your company name">
+            <input type="text" id="company" name="company" placeholder="Your company name" data-fs-field>
           </div>
           <div class="form-group">
             <label for="role">Role</label>
-            <input type="text" id="role" name="role" placeholder="Owner, VP Merchandising, etc.">
+            <input type="text" id="role" name="role" placeholder="Owner, VP Merchandising, etc." data-fs-field>
           </div>
           <div class="form-group">
             <label for="locations">Number of Locations</label>
-            <select id="locations" name="locations">
+            <select id="locations" name="locations" data-fs-field>
               <option value="" disabled selected>Select range</option>
               <option value="1-5">1 &ndash; 5 locations</option>
               <option value="6-25">6 &ndash; 25 locations</option>
@@ -1647,7 +1676,7 @@
           </div>
           <div class="form-group">
             <label for="segment">Retail Segment</label>
-            <select id="segment" name="segment">
+            <select id="segment" name="segment" data-fs-field>
               <option value="" disabled selected>Select segment</option>
               <option value="convenience">Convenience / C-Store</option>
               <option value="grocery">Grocery</option>
@@ -1659,10 +1688,10 @@
           </div>
           <div class="form-group full">
             <label for="message">Message (optional)</label>
-            <textarea id="message" name="message" placeholder="Tell us about your stores or what you'd like to discuss..."></textarea>
+            <textarea id="message" name="message" placeholder="Tell us about your stores or what you'd like to discuss..." data-fs-field></textarea>
           </div>
           <div class="form-group full form-submit">
-            <button type="submit" class="btn btn-dark btn-large btn-arrow">Request a Consultation </button>
+            <button type="submit" class="btn btn-dark btn-large btn-arrow" data-fs-submit-btn>Request a Consultation </button>
           </div>
         </form>
         </div><!-- /form-card -->
@@ -1835,43 +1864,11 @@
     }, { threshold: 0.4 });
     tabSections.forEach(s => tabObserver.observe(s));
 
-    // Form submission via mailto
-    document.getElementById('consultForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const fd = new FormData(this);
-      const name = fd.get('name') || '';
-      const email = fd.get('email') || '';
-      const company = fd.get('company') || '';
-      const role = fd.get('role') || '';
-      const locations = fd.get('locations') || '';
-      const segment = fd.get('segment') || '';
-      const message = fd.get('message') || '';
-
-      const subject = encodeURIComponent('Consultation Request from ' + name);
-      const body = encodeURIComponent(
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Company: ' + company + '\n' +
-        'Role: ' + role + '\n' +
-        'Locations: ' + locations + '\n' +
-        'Retail Segment: ' + segment + '\n\n' +
-        'Message:\n' + message
-      );
-
-      window.location.href = 'mailto:support@retaillumina.com?subject=' + subject + '&body=' + body;
-
-      const btn = this.querySelector('button[type="submit"]');
-      const originalHTML = btn.innerHTML;
-      btn.innerHTML = '\u2713 Opening your email client\u2026';
-      btn.style.background = '#16a34a';
-      this.reset();
-      setTimeout(() => {
-        btn.innerHTML = originalHTML;
-        btn.style.background = '';
-      }, 4000);
-    });
+    // Formspree form submission
+    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#consultForm', formId: 'mzdkyeeq' });
   </script>
-
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 </body>
 </html>
