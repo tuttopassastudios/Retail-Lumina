@@ -251,17 +251,8 @@
       transform: translateX(3px);
     }
 
-    /* ========== HERO SCROLL CONTAINER ========== */
-    .hero-scroll-container {
-      position: relative;
-      height: 250vh; /* extra scroll room for video scrubbing */
-      background: var(--gradient-light);
-    }
-
     /* ========== HERO ========== */
     .hero {
-      position: sticky;
-      top: 0;
       min-height: 100vh;
       background: var(--gradient-light);
       overflow: hidden;
@@ -500,30 +491,8 @@
       display: block;
     }
 
-    .shelf-scroll-hint {
-      text-align: center;
-      margin-top: 20px;
-      padding-bottom: 48px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      opacity: 0.6;
-      transition: opacity 0.3s;
-    }
-
-    .shelf-scroll-hint span {
-      display: inline-block;
-      animation: bounceDown 2s ease-in-out infinite;
-    }
-
-    @keyframes bounceDown {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(4px); }
-    }
-
     @media (max-width: 768px) {
       .shelf-scene { max-width: 100%; margin-top: 32px; }
-      .shelf-scroll-hint { padding-bottom: 32px; }
     }
 
     /* ========== SECTIONS ========== */
@@ -1010,6 +979,48 @@
       color: rgba(255,255,255,0.55);
     }
 
+    .form-card {
+      background: var(--gradient-light);
+      border-radius: 16px;
+      padding: 36px 32px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .form-card label {
+      color: var(--text-secondary) !important;
+    }
+
+    .form-card input,
+    .form-card select,
+    .form-card textarea {
+      background: rgba(0,0,0,0.06) !important;
+      border-color: rgba(0,0,0,0.12) !important;
+      color: var(--text-primary) !important;
+    }
+
+    .form-card input::placeholder,
+    .form-card textarea::placeholder {
+      color: rgba(0,0,0,0.4) !important;
+    }
+
+    .form-card input:focus,
+    .form-card select:focus,
+    .form-card textarea:focus {
+      border-color: rgba(0,0,0,0.25) !important;
+      background: rgba(0,0,0,0.09) !important;
+    }
+
+    .form-card select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(0,0,0,0.45)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: right 14px center !important;
+    }
+
+    .form-card .btn-dark {
+      background: var(--black);
+      color: var(--white);
+    }
+
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1423,8 +1434,7 @@
     </button>
   </nav>
 
-  <!-- HERO (pinned while video scrubs) -->
-  <div class="hero-scroll-container" id="heroScrollContainer">
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grid-line h1"></div>
@@ -1448,7 +1458,7 @@
         </div>
       </div>
 
-      <!-- Shelf Display — scroll-driven video -->
+      <!-- Shelf Display — looping video -->
       <div class="shelf-scene" id="shelfScene">
         <div class="shelf-video-wrap">
           <video id="shelfVideo" muted playsinline preload="auto">
@@ -1456,11 +1466,9 @@
             <source src="videos/shelf-scroll.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="shelf-scroll-hint"><span>Scroll to see it in action</span></div>
       </div>
     </div><!-- /hero-layout -->
   </section>
-  </div><!-- /hero-scroll-container -->
 
   <div class="snap-sections">
   <!-- HOW IT WORKS -->
@@ -1608,6 +1616,7 @@
         <h2>Ready to see what your<br>shelves could&nbsp;do?</h2>
         <p class="section-lead">Request a consultation and we'll walk you through how Retail Lumina works in your&nbsp;store.</p>
 
+        <div class="form-card">
         <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="form-grid" id="consultForm">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <div class="form-group">
@@ -1656,6 +1665,7 @@
             <button type="submit" class="btn btn-dark btn-large btn-arrow">Request a Consultation </button>
           </div>
         </form>
+        </div><!-- /form-card -->
       </div>
     </div>
   </section>
@@ -1688,36 +1698,11 @@
       });
     });
 
-    // Scroll-driven shelf video scrubbing (pinned hero)
+    // Shelf video — simple forward loop
     const shelfVideo = document.getElementById('shelfVideo');
-    const heroContainer = document.getElementById('heroScrollContainer');
-    if (shelfVideo && heroContainer) {
-      shelfVideo.pause();
-      shelfVideo.currentTime = 0;
-
-      const initScrollScrub = () => {
-        const duration = shelfVideo.duration;
-        if (!duration || isNaN(duration)) return;
-        const hint = heroContainer.querySelector('.shelf-scroll-hint');
-
-        const updateVideo = () => {
-          const containerTop = heroContainer.offsetTop;
-          const scrollRoom = heroContainer.offsetHeight - window.innerHeight;
-          const scrolled = window.scrollY - containerTop;
-          const progress = Math.max(0, Math.min(1, scrolled / scrollRoom));
-          shelfVideo.currentTime = progress * duration;
-          if (hint) hint.style.opacity = Math.max(0, 0.6 - progress * 3);
-        };
-
-        window.addEventListener('scroll', updateVideo, { passive: true });
-        updateVideo();
-      };
-
-      if (shelfVideo.readyState >= 1) {
-        initScrollScrub();
-      } else {
-        shelfVideo.addEventListener('loadedmetadata', initScrollScrub);
-      }
+    if (shelfVideo) {
+      shelfVideo.loop = true;
+      shelfVideo.play().catch(() => {});
     }
 
     // Mobile nav toggle
