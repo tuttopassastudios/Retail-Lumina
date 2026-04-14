@@ -50,7 +50,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
   <!-- Preload shelf scroll video (alpha-channel for dark theme) -->
-  <link rel="preload" as="video" href="videos/shelf-scroll-alpha.webm">
+  <link rel="preload" as="video" href="videos/shelf-scroll-alpha.mov">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1445,6 +1445,11 @@
       .product-demo-layout {
         grid-template-columns: 1fr;
         gap: 24px;
+        text-align: center;
+      }
+      .product-demo-layout .btn {
+        margin-left: auto;
+        margin-right: auto;
       }
     }
   </style>
@@ -1509,10 +1514,9 @@
       <!-- Shelf Display — looping video -->
       <div class="shelf-scene" id="shelfScene">
         <div class="shelf-video-wrap">
-          <video id="shelfVideo" muted playsinline preload="auto">
+          <video id="shelfVideo" muted playsinline preload="auto" style="background:transparent">
+            <source src="videos/shelf-scroll-alpha.mov" type='video/quicktime; codecs="hvc1"'>
             <source src="videos/shelf-scroll-alpha.webm" type="video/webm">
-            <source src="videos/shelf-scroll.webm" type="video/webm">
-            <source src="videos/shelf-scroll.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -1734,6 +1738,10 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">Retail <span>Lumina</span></div>
+      <div class="footer-links">
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
       <div class="footer-contact">
         <a href="mailto:support@retaillumina.com">support@retaillumina.com</a>
       </div>

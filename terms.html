@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Retail Lumina</title>
+  <meta name="description" content="Terms of Service for Retail Lumina's real-time pricing and shelf-edge media platform.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://retaillumina.com/terms.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --black-light: #1a1a1a;
+      --black-mid: #242424;
+      --accent: #0a0a0a;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-600: #4b5563;
+      --gray-800: #1f2937;
+      --text-primary: #0a0a0a;
+      --text-secondary: #4b5563;
+      --text-muted: #6b7280;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 8px 30px rgba(0,0,0,0.07);
+      --max-width: 1200px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --gradient-light: linear-gradient(135deg, #c8ccc8 0%, #ddddd0 30%, #e8e8d8 60%, #d0d4c8 100%);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text-primary);
+      line-height: 1.6;
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ========== NAV ========== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(216, 220, 210, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      transition: var(--transition);
+    }
+
+    .nav.scrolled {
+      background: rgba(216, 220, 210, 0.95);
+      box-shadow: 0 1px 20px rgba(0,0,0,0.06);
+    }
+
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--black);
+      letter-spacing: -0.03em;
+      text-decoration: none;
+    }
+
+    .nav-brand span { color: var(--black); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      padding: 12px 28px;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .nav-links a.btn-primary { color: var(--white); }
+
+    .btn-primary:hover {
+      background: var(--black-mid);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ========== MOBILE NAV ========== */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--black);
+      margin: 5px 0;
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ========== LEGAL CONTENT ========== */
+    .legal-section {
+      background: var(--gradient-light);
+      position: relative;
+      padding: 140px 24px 100px;
+      min-height: 100vh;
+    }
+
+    .legal-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.10;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 180px 180px;
+    }
+
+    .legal-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .legal-inner h1 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .legal-date {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+    }
+
+    .legal-inner h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .legal-inner p,
+    .legal-inner li {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .legal-inner ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    .legal-inner li {
+      margin-bottom: 6px;
+    }
+
+    .legal-inner a {
+      color: var(--text-primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .legal-inner a:hover {
+      color: var(--black);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 40px 24px;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .footer-brand span { color: var(--white); }
+
+    .footer-text {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .footer-contact a {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .footer-contact a:hover { color: var(--white); }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    /* ========== FOCUS ========== */
+    :focus-visible {
+      outline: 2px solid var(--black);
+      outline-offset: 2px;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px; left: 0; right: 0;
+        background: rgba(216, 220, 210, 0.98);
+        padding: 24px;
+        gap: 20px;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+      }
+      .nav-toggle { display: block; }
+
+      .legal-section { padding: 110px 20px 60px; }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-brand">Retail <span>Lumina</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#how-it-works">How It Works</a></li>
+      <li><a href="index.html#segments">Who It's For</a></li>
+      <li><a href="index.html#why-now">Why Now</a></li>
+      <li><a href="index.html#contact" class="btn btn-primary">Request a Consultation</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <section class="legal-section">
+    <div class="legal-inner">
+      <h1>Terms of Service</h1>
+      <p class="legal-date">Effective Date: April 5, 2026</p>
+
+      <p>Welcome to Retail Lumina. By accessing or using our website at retaillumina.com (the "Site") or any services provided by Retail Lumina ("we," "us," or "our"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use our Site or services.</p>
+
+      <h2>1. Description of Service</h2>
+      <p>Retail Lumina provides a real-time digital pricing and shelf-edge media platform for retail operators. Our services include digital shelf-edge display systems, real-time pricing management, promotional content delivery, and brand media monetization tools. Service availability and features are subject to the terms of any applicable service agreement.</p>
+
+      <h2>2. Eligibility</h2>
+      <p>Our services are designed for business use. By using the Site or services, you represent that you are at least 18 years of age and have the authority to enter into these Terms on behalf of yourself or the organization you represent.</p>
+
+      <h2>3. Use of the Site</h2>
+      <p>You agree to use the Site only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+      <ul>
+        <li>Use the Site in any way that violates any applicable law or regulation.</li>
+        <li>Attempt to gain unauthorized access to any portion of the Site, other accounts, or computer systems or networks connected to the Site.</li>
+        <li>Use any automated system, including bots, crawlers, or scrapers, to access the Site without our prior written consent.</li>
+        <li>Transmit any viruses, malware, or other harmful code through the Site.</li>
+        <li>Interfere with or disrupt the integrity or performance of the Site.</li>
+      </ul>
+
+      <h2>4. Intellectual Property</h2>
+      <p>All content on the Site, including text, graphics, logos, images, videos, and software, is the property of Retail Lumina or its licensors and is protected by applicable intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from any content on the Site without our prior written consent.</p>
+
+      <h2>5. Consultation Requests</h2>
+      <p>By submitting a consultation request through the Site, you consent to being contacted by Retail Lumina regarding our products and services. You represent that any information you provide is accurate and complete.</p>
+
+      <h2>6. Third-Party Links</h2>
+      <p>The Site may contain links to third-party websites or services that are not owned or controlled by Retail Lumina. We are not responsible for the content, privacy policies, or practices of any third-party sites or services.</p>
+
+      <h2>7. Disclaimer of Warranties</h2>
+      <p>The Site and all content, materials, and services provided through the Site are offered on an "as is" and "as available" basis, without warranties of any kind, whether express or implied. To the fullest extent permitted by law, Retail Lumina disclaims all warranties, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+
+      <h2>8. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by law, Retail Lumina and its officers, directors, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of the Site or services, regardless of the theory of liability.</p>
+
+      <h2>9. Indemnification</h2>
+      <p>You agree to indemnify, defend, and hold harmless Retail Lumina and its officers, directors, employees, and agents from any claims, liabilities, damages, losses, or expenses arising from your use of the Site or violation of these Terms.</p>
+
+      <h2>10. Changes to These Terms</h2>
+      <p>We reserve the right to modify these Terms at any time. Changes will be effective when posted on this page with an updated effective date. Your continued use of the Site after any changes constitutes acceptance of the new Terms.</p>
+
+      <h2>11. Governing Law</h2>
+      <p>These Terms shall be governed by and construed in accordance with the laws of the State of New York, without regard to its conflict of laws principles. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts located in New York, New York.</p>
+
+      <h2>12. Contact Us</h2>
+      <p>If you have any questions about these Terms of Service, please contact us at:</p>
+      <p>Retail Lumina<br>Email: <a href="mailto:support@retaillumina.com">support@retaillumina.com</a></p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">Retail <span>Lumina</span></div>
+      <div class="footer-links">
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+      <div class="footer-contact">
+        <a href="mailto:support@retaillumina.com">support@retaillumina.com</a>
+      </div>
+      <div class="footer-text">&copy; 2026 Retail Lumina. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { navLinks.classList.remove('open'); });
+    });
+  </script>
+</body>
+</html>
