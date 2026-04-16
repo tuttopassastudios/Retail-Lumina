@@ -1452,6 +1452,179 @@
         margin-right: auto;
       }
     }
+
+    /* ========== ACTIVATIONS ========== */
+    .activations-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .activation-block {
+      padding: 36px 32px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition);
+    }
+
+    .activation-block:hover {
+      border-color: var(--accent-border);
+      box-shadow: var(--shadow-hover), 0 0 0 1px var(--accent-border);
+      transform: translateY(-3px);
+      background: var(--bg-raised);
+    }
+
+    .activation-block-glow {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .activation-block-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .activation-block-label svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .activation-block h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .activation-block > p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .activation-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .activation-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .activation-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 7px;
+      box-shadow: 0 0 6px var(--accent-glow);
+    }
+
+    .activations-examples {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .activation-example {
+      padding: 24px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-subtle);
+      transition: all var(--transition);
+    }
+
+    .activation-example:hover {
+      border-color: var(--accent-border);
+      background: var(--accent-soft);
+      transform: translateY(-2px);
+    }
+
+    .activation-example-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .activation-example-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .activation-example h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 7px;
+      letter-spacing: -0.01em;
+    }
+
+    .activation-example p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    @media (max-width: 1024px) {
+      .activations-examples { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .activations-split { grid-template-columns: 1fr; }
+      .activations-examples { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .activation-block { padding: 24px 20px; }
+      .activation-example { padding: 18px 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .activations-examples { grid-template-columns: 1fr; }
+    }
   </style>
 
   <!-- Analytics — replace G-XXXXXXXXXX with your GA4 measurement ID -->
@@ -1480,6 +1653,7 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#how-it-works">How It Works</a></li>
       <li><a href="#segments">Who It's For</a></li>
+      <li><a href="#activations">Activations</a></li>
       <li><a href="#why-now">Why Now</a></li>
       <li><a href="#contact" class="btn btn-primary">Request a Consultation</a></li>
     </ul>
@@ -1632,6 +1806,85 @@
           </div>
           <h3>Brand &amp; CPG Partners</h3>
           <p>Reach shoppers at the point of purchase with dynamic, in-aisle media right next to the product. Turn retailer shelf edges into sellable media inventory that drives measurable results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAMIFICATION & BRAND ACTIVATIONS -->
+  <section class="section section-light" id="activations">
+
+    <div class="section-inner">
+      <div class="reveal-left" style="text-align: center; margin-bottom: 48px;">
+        <div class="section-eyebrow" style="justify-content: center;">Experiences &amp; Activations</div>
+        <h2>The shelf screen is more than<br>a&nbsp;price tag.</h2>
+        <p class="section-lead" style="margin-left: auto; margin-right: auto;">Once the shelf is live, brands and retailers can unlock a new class of in-store experience &mdash; from gamified shopper engagement to full campaign activations that turn a gondola aisle into a branded environment.</p>
+      </div>
+
+      <div class="activations-split stagger-children">
+        <div class="activation-block">
+          <div class="activation-block-glow"></div>
+          <div class="activation-block-label">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Gamification
+          </div>
+          <h3>Make shopping a game.</h3>
+          <p>The shelf screen gives brands a live canvas to reward curiosity, attention, and loyalty with mechanics that go far beyond a static coupon.</p>
+          <ul class="activation-list">
+            <li>In-aisle trivia and product knowledge challenges with instant rewards</li>
+            <li>Multi-aisle or multi-store scavenger hunts that drive full-store traffic</li>
+            <li>Loyalty-linked milestones &mdash; scan, engage, and earn in a single visit</li>
+            <li>Time-limited flash challenges that create urgency at the shelf</li>
+            <li>QR-triggered activations that bridge the screen to the shopper&rsquo;s phone</li>
+          </ul>
+        </div>
+
+        <div class="activation-block">
+          <div class="activation-block-glow"></div>
+          <div class="activation-block-label">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            Brand Activations
+          </div>
+          <h3>Own the aisle, not just the label.</h3>
+          <p>Brands can move beyond the product package and take control of the entire shelf environment &mdash; with dynamic, coordinated creative delivered at the exact point of purchase.</p>
+          <ul class="activation-list">
+            <li>Product launch takeovers that animate the full category section on day one</li>
+            <li>Seasonal campaign pods with coordinated creative across relevant aisles</li>
+            <li>Motion brand storytelling at the moment the shopper is comparing options</li>
+            <li>Cross-sell and bundle messaging triggered contextually next to key SKUs</li>
+            <li>Network-wide campaign delivery &mdash; update every screen in every store instantly</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="activations-examples stagger-children">
+        <div class="activation-example">
+          <div class="activation-example-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h4>Shelf Trivia</h4>
+          <p>Shoppers answer a brand-sponsored question right at the shelf and unlock a discount or loyalty points on the spot.</p>
+        </div>
+        <div class="activation-example">
+          <div class="activation-example-icon">
+            <svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          </div>
+          <h4>Scavenger Hunt</h4>
+          <p>A clue on one shelf screen sends shoppers to another aisle, building basket size and dwell time across the entire store.</p>
+        </div>
+        <div class="activation-example">
+          <div class="activation-example-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h4>Launch Takeover</h4>
+          <p>A brand pays to animate every screen in their section during a product launch week &mdash; coordinated motion across the full gondola bay.</p>
+        </div>
+        <div class="activation-example">
+          <div class="activation-example-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h4>Loyalty Reward</h4>
+          <p>A QR code on the shelf screen links directly to the retailer&rsquo;s loyalty app &mdash; shopper scans, purchases, and earns points without leaving the aisle.</p>
         </div>
       </div>
     </div>
