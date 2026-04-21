@@ -1625,6 +1625,144 @@
     @media (max-width: 480px) {
       .activations-examples { grid-template-columns: 1fr; }
     }
+
+    /* ========== QUESTIONNAIRE ========== */
+    .qs-screen { display: none; }
+    .qs-screen.active {
+      display: block;
+      animation: qsFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes qsFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .qs-question {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .qs-subtext {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .qs-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .qs-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      line-height: 1.4;
+      width: 100%;
+    }
+
+    .qs-option:hover {
+      border-color: var(--accent-border);
+      background: var(--accent-soft);
+      color: var(--text-primary);
+      transform: translateX(3px);
+    }
+
+    .qs-option-dot {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--border-strong);
+      transition: all 0.2s ease;
+    }
+
+    .qs-option:hover .qs-option-dot {
+      border-color: var(--accent);
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent-glow);
+    }
+
+    .qs-nav { margin-top: 4px; }
+
+    .qs-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px 0;
+      font-family: inherit;
+      transition: color 0.2s;
+    }
+
+    .qs-back::before { content: '← '; }
+    .qs-back:hover { color: var(--text-secondary); }
+
+    .qs-recap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .qs-recap-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 11px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent-light);
+      letter-spacing: 0.01em;
+    }
+
+    .qs-success-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(22, 163, 74, 0.1);
+      border: 1px solid rgba(22, 163, 74, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .qs-success-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: #22c55e;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
   </style>
 
   <!-- Analytics — replace G-XXXXXXXXXX with your GA4 measurement ID -->
@@ -1928,58 +2066,143 @@
         <p class="section-lead">Request a consultation and we'll walk you through how Retail Lumina works in your&nbsp;store.</p>
 
         <div class="form-card">
-        <div data-fs-success>Thank you! We'll be in touch soon.</div>
-        <div data-fs-error></div>
-        <form class="form-grid" id="consultForm">
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="John Smith" required data-fs-field>
-            <span data-fs-error="name"></span>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="john@company.com" required data-fs-field>
-            <span data-fs-error="email"></span>
-          </div>
-          <div class="form-group">
-            <label for="company">Company</label>
-            <input type="text" id="company" name="company" placeholder="Your company name" data-fs-field>
-          </div>
-          <div class="form-group">
-            <label for="role">Role</label>
-            <input type="text" id="role" name="role" placeholder="Owner, VP Merchandising, etc." data-fs-field>
-          </div>
-          <div class="form-group">
-            <label for="locations">Number of Locations</label>
-            <select id="locations" name="locations" data-fs-field>
-              <option value="" disabled selected>Select range</option>
-              <option value="1-5">1 &ndash; 5 locations</option>
-              <option value="6-25">6 &ndash; 25 locations</option>
-              <option value="26-100">26 &ndash; 100 locations</option>
-              <option value="100+">100+ locations</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="segment">Retail Segment</label>
-            <select id="segment" name="segment" data-fs-field>
-              <option value="" disabled selected>Select segment</option>
-              <option value="convenience">Convenience / C-Store</option>
-              <option value="grocery">Grocery</option>
-              <option value="retail-chain">Retail Chain</option>
-              <option value="specialty">Specialty Retail</option>
-              <option value="brand-partner">Brand / CPG Partner</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="form-group full">
-            <label for="message">Message (optional)</label>
-            <textarea id="message" name="message" placeholder="Tell us about your stores or what you'd like to discuss..." data-fs-field></textarea>
-          </div>
-          <div class="form-group full form-submit">
-            <button type="submit" class="btn btn-dark btn-large btn-arrow" data-fs-submit-btn>Request a Consultation </button>
-          </div>
-        </form>
+          <div class="qs-wrapper">
+
+            <!-- PATH SELECTION -->
+            <div class="qs-screen active" data-screen="path">
+              <p class="qs-question">What brings you here today?</p>
+              <div class="qs-options">
+                <button class="qs-option" type="button" data-path="store" data-screen-next="store-q1">
+                  <span class="qs-option-dot"></span>I'm a store owner looking to add screens to my retail space
+                </button>
+                <button class="qs-option" type="button" data-path="brand" data-screen-next="brand-q1">
+                  <span class="qs-option-dot"></span>I'm a brand representative exploring activation opportunities
+                </button>
+              </div>
+            </div>
+
+            <!-- STORE Q1: Locations -->
+            <div class="qs-screen" data-screen="store-q1">
+              <p class="qs-question">How many locations are you looking to equip?</p>
+              <div class="qs-options">
+                <button class="qs-option" type="button" data-answer-key="q1" data-answer-label="1 location" data-screen-next="store-q2"><span class="qs-option-dot"></span>Just one store</button>
+                <button class="qs-option" type="button" data-answer-key="q1" data-answer-label="2&ndash;5 locations" data-screen-next="store-q2"><span class="qs-option-dot"></span>2&ndash;5 locations</button>
+                <button class="qs-option" type="button" data-answer-key="q1" data-answer-label="6&ndash;20 locations" data-screen-next="store-q2"><span class="qs-option-dot"></span>6&ndash;20 locations</button>
+                <button class="qs-option" type="button" data-answer-key="q1" data-answer-label="20+ locations" data-screen-next="store-q2"><span class="qs-option-dot"></span>20+ locations</button>
+              </div>
+              <div class="qs-nav"><button class="qs-back" type="button">Back</button></div>
+            </div>
+
+            <!-- STORE Q2: Signage -->
+            <div class="qs-screen" data-screen="store-q2">
+              <p class="qs-question">Do you currently have any in-store digital signage?</p>
+              <div class="qs-options">
+                <button class="qs-option" type="button" data-answer-key="q2" data-answer-label="No current signage" data-screen-next="store-q3"><span class="qs-option-dot"></span>No, this would be our first screens</button>
+                <button class="qs-option" type="button" data-answer-key="q2" data-answer-label="Looking to upgrade or expand" data-screen-next="store-q3"><span class="qs-option-dot"></span>Yes, we're looking to upgrade or expand</button>
+                <button class="qs-option" type="button" data-answer-key="q2" data-answer-label="Looking to switch providers" data-screen-next="store-q3"><span class="qs-option-dot"></span>Yes, we want to switch providers</button>
+              </div>
+              <div class="qs-nav"><button class="qs-back" type="button">Back</button></div>
+            </div>
+
+            <!-- STORE Q3: Timeline -->
+            <div class="qs-screen" data-screen="store-q3">
+              <p class="qs-question">When are you looking to get started?</p>
+              <div class="qs-options">
+                <button class="qs-option" type="button" data-answer-key="q3" data-answer-label="Ready ASAP" data-screen-next="contact"><span class="qs-option-dot"></span>As soon as possible</button>
+                <button class="qs-option" type="button" data-answer-key="q3" data-answer-label="1&ndash;3 months" data-screen-next="contact"><span class="qs-option-dot"></span>1&ndash;3 months</button>
+                <button class="qs-option" type="button" data-answer-key="q3" data-answer-label="3&ndash;6 months" data-screen-next="contact"><span class="qs-option-dot"></span>3&ndash;6 months</button>
+                <button class="qs-option" type="button" data-answer-key="q3" data-answer-label="Just exploring" data-screen-next="contact"><span class="qs-option-dot"></span>Just exploring for now</button>
+              </div>
+              <div class="qs-nav"><button class="qs-back" type="button">Back</button></div>
+            </div>
+
+            <!-- BRAND Q1: Activation Type -->
+            <div class="qs-screen" data-screen="brand-q1">
+              <p class="qs-question">What type of activation are you exploring?</p>
+              <div class="qs-options">
+                <button class="qs-option" type="button" data-answer-key="q1" data-answer-label="Product promotion" data-screen-next="brand-q2"><span class="qs-option-dot"></span>In-store product promotion or featured placement</button>
+                <button class="qs-option" type="button" data-answer-key="q1" data-answer-label="Brand campaign" data-screen-next="brand-q2"><span class="qs-option-dot"></span>Brand campaign or seasonal activation</button>
+                <button class="qs-option" type="button" data-answer-key="q1" data-answer-label="Long-term partnership" data-screen-next="brand-q2"><span class="qs-option-dot"></span>Long-term partnership or collaboration</button>
+                <button class="qs-option" type="button" data-answer-key="q1" data-answer-label="Exploring options" data-screen-next="brand-q2"><span class="qs-option-dot"></span>Not sure yet, just exploring</button>
+              </div>
+              <div class="qs-nav"><button class="qs-back" type="button">Back</button></div>
+            </div>
+
+            <!-- BRAND Q2: Reach -->
+            <div class="qs-screen" data-screen="brand-q2">
+              <p class="qs-question">How many retail locations are you hoping to reach?</p>
+              <div class="qs-options">
+                <button class="qs-option" type="button" data-answer-key="q2" data-answer-label="Fewer than 10 stores" data-screen-next="brand-q3"><span class="qs-option-dot"></span>Fewer than 10 stores</button>
+                <button class="qs-option" type="button" data-answer-key="q2" data-answer-label="10&ndash;50 stores" data-screen-next="brand-q3"><span class="qs-option-dot"></span>10&ndash;50 stores</button>
+                <button class="qs-option" type="button" data-answer-key="q2" data-answer-label="50&ndash;200 stores" data-screen-next="brand-q3"><span class="qs-option-dot"></span>50&ndash;200 stores</button>
+                <button class="qs-option" type="button" data-answer-key="q2" data-answer-label="200+ stores" data-screen-next="brand-q3"><span class="qs-option-dot"></span>200+ stores</button>
+              </div>
+              <div class="qs-nav"><button class="qs-back" type="button">Back</button></div>
+            </div>
+
+            <!-- BRAND Q3: Timeline -->
+            <div class="qs-screen" data-screen="brand-q3">
+              <p class="qs-question">What's your anticipated launch timeline?</p>
+              <div class="qs-options">
+                <button class="qs-option" type="button" data-answer-key="q3" data-answer-label="Within 1 month" data-screen-next="contact"><span class="qs-option-dot"></span>Within the next month</button>
+                <button class="qs-option" type="button" data-answer-key="q3" data-answer-label="1&ndash;3 months" data-screen-next="contact"><span class="qs-option-dot"></span>1&ndash;3 months</button>
+                <button class="qs-option" type="button" data-answer-key="q3" data-answer-label="3&ndash;6 months" data-screen-next="contact"><span class="qs-option-dot"></span>3&ndash;6 months</button>
+                <button class="qs-option" type="button" data-answer-key="q3" data-answer-label="Early planning" data-screen-next="contact"><span class="qs-option-dot"></span>Early planning stages</button>
+              </div>
+              <div class="qs-nav"><button class="qs-back" type="button">Back</button></div>
+            </div>
+
+            <!-- CONTACT FORM -->
+            <div class="qs-screen" data-screen="contact">
+              <p class="qs-question" id="qs-contact-heading">Let's get in touch.</p>
+              <div class="qs-recap" id="qs-recap"></div>
+              <form class="form-grid" id="consultForm" novalidate>
+                <input type="hidden" name="_subject" id="qs-subject">
+                <input type="hidden" name="inquiry_type" id="qs-inquiry-type">
+                <input type="hidden" name="summary" id="qs-summary">
+                <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                <div class="form-group">
+                  <label for="name">Full Name</label>
+                  <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+                </div>
+                <div class="form-group">
+                  <label for="org" id="qs-org-label">Store Name</label>
+                  <input type="text" id="org" name="organization" placeholder="Your store name">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" placeholder="jane@company.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone <span style="font-weight:400;color:var(--text-muted)">(optional)</span></label>
+                  <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
+                </div>
+                <div class="form-group full">
+                  <label for="notes">Additional Notes <span style="font-weight:400;color:var(--text-muted)">(optional)</span></label>
+                  <textarea id="notes" name="notes" placeholder="Anything else you'd like us to know..."></textarea>
+                </div>
+                <div class="form-group full form-submit">
+                  <button type="submit" class="btn btn-dark btn-large btn-arrow" id="qs-submit-btn">Send Message </button>
+                </div>
+                <div class="form-group full" id="qs-form-error" style="display:none">
+                  <p style="font-size:0.875rem;color:#f87171;">Something went wrong. Please try again or email us at <a href="mailto:support@retaillumina.com" style="color:var(--accent)">support@retaillumina.com</a>.</p>
+                </div>
+              </form>
+              <div class="qs-nav"><button class="qs-back" type="button">Back</button></div>
+            </div>
+
+            <!-- SUCCESS -->
+            <div class="qs-screen" data-screen="success">
+              <div style="text-align:center;padding:32px 0 16px">
+                <div class="qs-success-icon">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h3 style="font-size:1.25rem;font-weight:800;letter-spacing:-0.02em;color:var(--text-primary);margin-bottom:12px">We'll be in touch soon.</h3>
+                <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.65;max-width:340px;margin:0 auto">Thank you for reaching out. A member of our team will get back to you shortly.</p>
+              </div>
+            </div>
+
+          </div><!-- /qs-wrapper -->
         </div><!-- /form-card -->
       </div>
     </div>
@@ -2063,7 +2286,7 @@
             sectionObserver.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.4 });
+      }, { threshold: 0.15 });
 
       sections.forEach(section => sectionObserver.observe(section));
 
@@ -2154,11 +2377,121 @@
     }, { threshold: 0.4 });
     tabSections.forEach(s => tabObserver.observe(s));
 
-    // Formspree form submission
-    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-    formspree('initForm', { formElement: '#consultForm', formId: 'mzdkyeeq' });
+    // Questionnaire
+    (function () {
+      var state = { path: null, answers: {}, history: ['path'] };
+
+      function showScreen(name) {
+        document.querySelectorAll('.qs-screen').forEach(function (s) { s.classList.remove('active'); });
+        var el = document.querySelector('[data-screen="' + name + '"]');
+        if (el) el.classList.add('active');
+      }
+
+      function pushScreen(name) {
+        state.history.push(name);
+        showScreen(name);
+      }
+
+      function buildSubject() {
+        var prefix = state.path === 'store' ? 'Store Inquiry' : 'Brand Inquiry';
+        var parts = [prefix].concat(Object.values(state.answers));
+        return parts.join(' \u00b7 ');
+      }
+
+      function updateContactForm() {
+        var orgLabel = document.getElementById('qs-org-label');
+        var orgInput = document.getElementById('org');
+        var heading = document.getElementById('qs-contact-heading');
+        var recap = document.getElementById('qs-recap');
+
+        if (state.path === 'brand') {
+          if (orgLabel) orgLabel.textContent = 'Brand / Company';
+          if (orgInput) orgInput.placeholder = 'Your brand or company name';
+          if (heading) heading.textContent = "Let\u2019s connect.";
+        } else {
+          if (orgLabel) orgLabel.textContent = 'Store Name';
+          if (orgInput) orgInput.placeholder = 'Your store name';
+          if (heading) heading.textContent = "Let\u2019s get in touch.";
+        }
+
+        if (recap) {
+          recap.innerHTML = Object.values(state.answers).map(function (v) {
+            return '<span class="qs-recap-chip">' + v + '</span>';
+          }).join('');
+        }
+      }
+
+      document.querySelectorAll('.qs-option').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var path = this.dataset.path;
+          var answerKey = this.dataset.answerKey;
+          var answerLabel = this.dataset.answerLabel;
+          var nextScreen = this.dataset.screenNext;
+
+          if (path) {
+            state.path = path;
+            state.answers = {};
+          }
+          if (answerKey) {
+            state.answers[answerKey] = answerLabel;
+          }
+          if (nextScreen === 'contact') {
+            updateContactForm();
+          }
+          if (nextScreen) {
+            pushScreen(nextScreen);
+          }
+        });
+      });
+
+      document.querySelectorAll('.qs-back').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (state.history.length <= 1) return;
+          state.history.pop();
+          showScreen(state.history[state.history.length - 1]);
+        });
+      });
+
+      var form = document.getElementById('consultForm');
+      if (form) {
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          if (!form.checkValidity()) { form.reportValidity(); return; }
+
+          var subjectEl = document.getElementById('qs-subject');
+          var typeEl = document.getElementById('qs-inquiry-type');
+          var summaryEl = document.getElementById('qs-summary');
+          if (subjectEl) subjectEl.value = buildSubject();
+          if (typeEl) typeEl.value = state.path === 'store' ? 'Store Owner' : 'Brand Representative';
+          if (summaryEl) summaryEl.value = Object.values(state.answers).join(', ');
+
+          var submitBtn = document.getElementById('qs-submit-btn');
+          var errorEl = document.getElementById('qs-form-error');
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending\u2026';
+
+          try {
+            var res = await fetch('https://formspree.io/f/mzdkyeeq', {
+              method: 'POST',
+              body: new FormData(form),
+              headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+              pushScreen('success');
+            } else {
+              errorEl.style.display = 'block';
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = 'Send Message &#x2192;';
+            }
+          } catch (err) {
+            errorEl.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Send Message &#x2192;';
+          }
+        });
+      }
+    })();
   </script>
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 </body>
 </html>
