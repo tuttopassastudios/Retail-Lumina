@@ -1764,6 +1764,174 @@
       stroke-linejoin: round;
     }
 
+    /* ========== PRODUCT GALLERY ========== */
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    .gallery-header h2 {
+      margin-bottom: 12px;
+    }
+    .gallery-header .section-lead {
+      max-width: 560px;
+      margin: 0;
+    }
+    .gallery-nav {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .gallery-nav-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border-default);
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .gallery-nav-btn:hover {
+      border-color: var(--accent-border);
+      background: var(--bg-raised);
+      color: var(--accent-light);
+    }
+    .gallery-nav-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .gallery-track-wrap {
+      margin: 0 calc(-1 * 32px);
+      padding: 0 32px;
+      mask-image: linear-gradient(to right, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%);
+    }
+    .gallery-track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 8px 0 24px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-border) transparent;
+    }
+    .gallery-track::-webkit-scrollbar {
+      height: 6px;
+    }
+    .gallery-track::-webkit-scrollbar-thumb {
+      background: var(--accent-border);
+      border-radius: 3px;
+    }
+    .gallery-track::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .gallery-tile {
+      flex: 0 0 360px;
+      scroll-snap-align: start;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      margin: 0;
+    }
+    .gallery-tile:hover {
+      border-color: var(--accent-border);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .gallery-tile img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .gallery-tile:hover img {
+      transform: scale(1.04);
+    }
+    .gallery-tile figcaption {
+      padding: 20px 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .gallery-tag {
+      display: inline-flex;
+      align-self: flex-start;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      color: var(--accent-light);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .gallery-tag-soon {
+      background: rgba(244, 114, 182, 0.12);
+      border-color: rgba(244, 114, 182, 0.35);
+      color: #f9a8d4;
+    }
+    .gallery-tile h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+    .gallery-tile p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+    .gallery-tile-placeholder {
+      background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(139,92,246,0.06));
+      border: 1px dashed var(--border-strong);
+    }
+    .gallery-placeholder-art {
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 12px, transparent 12px 24px),
+        var(--bg-raised);
+      color: var(--accent-light);
+    }
+    .gallery-placeholder-art svg {
+      width: 64px;
+      height: 64px;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 900px) {
+      .gallery-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      .gallery-tile { flex-basis: 280px; }
+    }
+    @media (max-width: 600px) {
+      .gallery-tile { flex-basis: 240px; }
+    }
+
     /* ========== INSTALL SCROLL ANIMATION ========== */
     .install-scroll {
       position: relative;
@@ -2805,6 +2973,100 @@
     </div>
   </section>
 
+  <!-- PRODUCT GALLERY -->
+  <section class="section section-light" id="gallery">
+    <div class="section-inner">
+      <div class="gallery-header reveal-left">
+        <div>
+          <div class="section-eyebrow">The Hardware</div>
+          <h2>Designed for the shelf. Not retrofitted to&nbsp;it.</h2>
+          <p class="section-lead">Slim, shelf-edge LED bars engineered to snap onto existing gondolas in every format &mdash; from convenience coolers to full-aisle grocery displays.</p>
+        </div>
+        <div class="gallery-nav" aria-hidden="true">
+          <button class="gallery-nav-btn" data-gallery-dir="prev" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="gallery-nav-btn" data-gallery-dir="next" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="gallery-track-wrap">
+        <div class="gallery-track" id="galleryTrack">
+          <figure class="gallery-tile">
+            <img src="images/gondola-hero.jpeg" alt="Shelf-edge LED display on a retail gondola" loading="lazy">
+            <figcaption>
+              <span class="gallery-tag">End-cap</span>
+              <h4>Full-aisle shelf edge</h4>
+              <p>Coordinated creative across every tier of a gondola bay.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-tile">
+            <img src="images/gondola-colorful.jpg" alt="Vivid multi-color shelf-edge campaign" loading="lazy">
+            <figcaption>
+              <span class="gallery-tag">Campaign</span>
+              <h4>Full-color brand activation</h4>
+              <p>High-contrast motion creative at the exact point of purchase.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-tile">
+            <img src="images/hardware-unit.jpeg" alt="Close-up of the Retail Lumina hardware unit" loading="lazy">
+            <figcaption>
+              <span class="gallery-tag">Hardware</span>
+              <h4>The shelf-edge unit</h4>
+              <p>Slim profile, snap-on mount, interaction sensors built in.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-tile">
+            <img src="images/gondola-purple.jpeg" alt="Seasonal shelf takeover in purple tones" loading="lazy">
+            <figcaption>
+              <span class="gallery-tag">Seasonal</span>
+              <h4>Themed takeover</h4>
+              <p>Holiday and launch moments, rolled out network-wide in minutes.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-tile">
+            <img src="images/cocacola-strip.jpeg" alt="Branded CPG shelf strip" loading="lazy">
+            <figcaption>
+              <span class="gallery-tag">CPG partner</span>
+              <h4>Brand-sponsored strip</h4>
+              <p>Turn-key placements that plug into existing CPG retail media spend.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-tile">
+            <img src="images/store-shelf-bg.webp" alt="In-store environment with shelf-edge screens" loading="lazy">
+            <figcaption>
+              <span class="gallery-tag">In store</span>
+              <h4>Real aisle conditions</h4>
+              <p>Designed to read clearly under any retail lighting.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-tile gallery-tile-placeholder">
+            <div class="gallery-placeholder-art" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="8" y="14" width="48" height="36" rx="4"/>
+                <circle cx="22" cy="28" r="3"/>
+                <path d="M8 42l14-14 12 12 8-8 14 14"/>
+              </svg>
+            </div>
+            <figcaption>
+              <span class="gallery-tag gallery-tag-soon">Coming Soon</span>
+              <h4>New photography in&nbsp;progress</h4>
+              <p>Custom shelf installations in live retail locations, shot this spring.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- GAMIFICATION & BRAND ACTIVATIONS -->
   <section class="section section-light" id="activations">
 
@@ -3403,6 +3665,20 @@
       });
     }, { threshold: 0.4 });
     tabSections.forEach(s => tabObserver.observe(s));
+
+    // Gallery arrow-button scrolling
+    (function () {
+      var track = document.getElementById('galleryTrack');
+      if (!track) return;
+      document.querySelectorAll('[data-gallery-dir]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var dir = this.dataset.galleryDir === 'next' ? 1 : -1;
+          var tile = track.querySelector('.gallery-tile');
+          var step = tile ? tile.getBoundingClientRect().width + 20 : 360;
+          track.scrollBy({ left: dir * step, behavior: 'smooth' });
+        });
+      });
+    })();
 
     // Install scroll animation — drive stage progress from scroll position
     (function () {
