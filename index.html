@@ -1764,6 +1764,255 @@
       stroke-linejoin: round;
     }
 
+    /* ========== INSTALL SCROLL ANIMATION ========== */
+    .install-scroll {
+      position: relative;
+      height: 420vh;
+      --p: 0; --p1: 0; --p2: 0; --p3: 0; --p4: 0;
+      background: linear-gradient(180deg, #0a0a0f 0%, #121219 50%, #0a0a0f 100%);
+      border-top: 1px solid var(--border-default);
+      border-bottom: 1px solid var(--border-default);
+    }
+    .install-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .install-sticky::before,
+    .install-sticky::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .install-sticky::before {
+      background: radial-gradient(ellipse 70% 50% at 70% 40%, rgba(59, 130, 246, calc(var(--p4) * 0.18)) 0%, transparent 70%);
+      transition: background 0.3s ease;
+    }
+    .install-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 64px;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    .install-copy .section-eyebrow {
+      margin-bottom: 12px;
+    }
+    .install-copy h2 {
+      margin-bottom: 20px;
+    }
+    .install-lead {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 460px;
+    }
+    .install-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-left: 1px solid var(--border-default);
+    }
+    .install-steps li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 18px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .install-steps li::before {
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: 50%;
+      width: 2px;
+      height: 0;
+      background: var(--accent);
+      transform: translateY(-50%);
+      box-shadow: 0 0 8px var(--accent-glow);
+      transition: height 0.3s ease;
+    }
+    .install-steps li.active {
+      color: var(--text-primary);
+      transform: translateX(4px);
+    }
+    .install-steps li.active::before {
+      height: 60%;
+    }
+    .install-step-num {
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+    .install-steps li.active .install-step-num {
+      color: var(--accent);
+    }
+    .install-step-label {
+      font-weight: 500;
+    }
+    .install-footnote {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: calc(1 - var(--p));
+      transition: opacity 0.2s linear;
+    }
+
+    .install-stage {
+      position: relative;
+    }
+    .install-svg {
+      width: 100%;
+      height: auto;
+      max-height: 72vh;
+      display: block;
+    }
+
+    /* Shelf base layers */
+    .install-back {
+      fill: #111118;
+      stroke: rgba(255,255,255,0.04);
+    }
+    .install-lip,
+    .install-shelf-body {
+      fill: url(#installShelfGrad);
+      stroke: rgba(255,255,255,0.06);
+    }
+    .install-upright {
+      fill: #1a1a1f;
+      stroke: rgba(255,255,255,0.06);
+    }
+    .install-floor-shadow {
+      fill: rgba(0,0,0,0.6);
+      filter: blur(6px);
+    }
+    .install-products rect {
+      fill: #2a2a32;
+      stroke: rgba(255,255,255,0.05);
+      stroke-width: 1;
+    }
+    .install-products rect:nth-child(odd) { fill: #32323b; }
+
+    /* The LED screen — offscreen until stage 2 */
+    .install-screen {
+      transform: translateY(calc(-260px * (1 - var(--p2))));
+      transform-origin: center top;
+      transition: transform 0.08s linear;
+    }
+    .install-screen-body {
+      fill: #1a1a1f;
+      stroke: rgba(255,255,255,0.12);
+      stroke-width: 1;
+    }
+    .install-screen-face {
+      fill: #000;
+    }
+
+    /* Settle/clip confirmation: slight drop + outline pulse on stage 3 */
+    .install-screen-body {
+      stroke: rgba(59, 130, 246, calc(var(--p3) * 0.8));
+      stroke-width: calc(1px + var(--p3) * 1.5);
+    }
+
+    /* Screen content fades in once clipped (stage 4) */
+    .install-screen-content {
+      opacity: var(--p4);
+      transition: opacity 0.15s linear;
+    }
+    .install-screen-glow {
+      fill: url(#installScreenGrad);
+      opacity: calc(var(--p4) * 0.9);
+      filter: blur(3px);
+    }
+
+    /* Cable tucks in on stage 3 */
+    .install-cable {
+      stroke: #52525b;
+      stroke-dasharray: 120;
+      stroke-dashoffset: calc(120 * (1 - var(--p3)));
+      opacity: calc(0.3 + var(--p3) * 0.7);
+      transition: stroke-dashoffset 0.15s linear;
+    }
+
+    /* Tracking dots appear + pulse on stage 4 */
+    .install-tracks {
+      opacity: var(--p4);
+    }
+    .install-track-dot {
+      fill: #60a5fa;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: installTrackPulse 1.8s ease-in-out infinite;
+      animation-delay: calc(var(--d, 0) * 1s);
+    }
+    @keyframes installTrackPulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.6); opacity: 0.3; }
+    }
+
+    /* Scroll progress bar under the scene */
+    .install-progress-track {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      bottom: 4%;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+    .install-progress-fill {
+      height: 100%;
+      width: calc(var(--p) * 100%);
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      box-shadow: 0 0 12px var(--accent-glow);
+      border-radius: inherit;
+    }
+
+    @media (max-width: 900px) {
+      .install-scroll { height: 360vh; }
+      .install-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 0 20px;
+      }
+      .install-copy h2 { font-size: 1.6rem; }
+      .install-lead { font-size: 0.92rem; }
+      .install-svg { max-height: 42vh; }
+    }
+    @media (max-width: 600px) {
+      .install-scroll { height: 300vh; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .install-scroll { height: auto; }
+      .install-sticky { position: relative; height: auto; padding: 80px 0; }
+      .install-screen { transform: none !important; }
+      .install-screen-content,
+      .install-tracks,
+      .install-cable { opacity: 1 !important; stroke-dashoffset: 0 !important; }
+      .install-track-dot { animation: none; }
+    }
+
     /* ========== NAV PILL ========== */
     .nav-pill {
       display: inline-block;
@@ -2364,6 +2613,105 @@
           <h3>Interaction Tracking</h3>
           <p class="desktop-desc">Every tap, dwell, and scan at the shelf feeds a live insights stream. Operators see what's converting; brands see how their creative performs &mdash; all the way down to the SKU, aisle, and&nbsp;store.</p>
           <p class="mobile-desc">Taps, dwell, and scans feed a live insights stream &mdash; down to the SKU, aisle, and store.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALL SCROLL ANIMATION -->
+  <section class="install-scroll" id="install">
+    <div class="install-sticky">
+      <div class="install-inner">
+        <div class="install-copy">
+          <div class="section-eyebrow">Zero-Mod Install</div>
+          <h2>Snaps on. Lights up.<br>Measures&nbsp;everything.</h2>
+          <p class="install-lead">Lumina screens clip directly onto any existing gondola lip &mdash; no drilling, no rewiring, no planogram rebuild. A single technician can re-equip an entire aisle in an afternoon.</p>
+          <ol class="install-steps">
+            <li data-step="1"><span class="install-step-num">01</span><span class="install-step-label">Bare shelf edge</span></li>
+            <li data-step="2"><span class="install-step-num">02</span><span class="install-step-label">Screen slides into position</span></li>
+            <li data-step="3"><span class="install-step-num">03</span><span class="install-step-label">Clips on &mdash; no modification</span></li>
+            <li data-step="4"><span class="install-step-num">04</span><span class="install-step-label">Powers on, tracking live</span></li>
+          </ol>
+          <p class="install-footnote">&uarr; Scroll to install.</p>
+        </div>
+
+        <div class="install-stage">
+          <svg class="install-svg" viewBox="0 0 600 460" aria-hidden="true">
+            <defs>
+              <linearGradient id="installScreenGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#3b82f6"/>
+                <stop offset="50%" stop-color="#8b5cf6"/>
+                <stop offset="100%" stop-color="#ec4899"/>
+              </linearGradient>
+              <linearGradient id="installShelfGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3f3f46"/>
+                <stop offset="100%" stop-color="#27272a"/>
+              </linearGradient>
+              <filter id="installGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="4" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Shelf back panel -->
+            <rect x="60" y="60" width="480" height="260" rx="4" class="install-back"/>
+
+            <!-- Products on shelf -->
+            <g class="install-products">
+              <rect x="90"  y="130" width="56" height="90" rx="3"/>
+              <rect x="160" y="120" width="56" height="100" rx="3"/>
+              <rect x="230" y="140" width="56" height="80" rx="3"/>
+              <rect x="300" y="115" width="56" height="105" rx="3"/>
+              <rect x="370" y="135" width="56" height="85" rx="3"/>
+              <rect x="440" y="125" width="56" height="95" rx="3"/>
+            </g>
+
+            <!-- Shelf lip (where screen clips onto) -->
+            <rect x="60" y="220" width="480" height="18" rx="2" class="install-lip"/>
+            <rect x="60" y="238" width="480" height="82" rx="2" class="install-shelf-body"/>
+
+            <!-- Vertical shelf uprights -->
+            <rect x="50" y="50" width="10" height="280" rx="2" class="install-upright"/>
+            <rect x="540" y="50" width="10" height="280" rx="2" class="install-upright"/>
+
+            <!-- Floor shadow -->
+            <ellipse cx="300" cy="350" rx="240" ry="10" class="install-floor-shadow"/>
+
+            <!-- Cable tucking behind shelf (appears stage 3) -->
+            <path class="install-cable" d="M540,232 Q560,250 560,285 L560,330" fill="none" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- The LED screen (descends stage 2, clips stage 3, lights stage 4) -->
+            <g class="install-screen">
+              <rect x="58" y="214" width="484" height="22" rx="4" class="install-screen-body"/>
+              <rect x="62" y="217" width="476" height="16" rx="2" class="install-screen-face"/>
+
+              <!-- Screen content: simulated pricing / promo / tracking ticker -->
+              <g class="install-screen-content">
+                <rect x="74"  y="220" width="80" height="10" rx="1" fill="#fff" opacity="0.95"/>
+                <rect x="162" y="220" width="54" height="10" rx="1" fill="#fbbf24" opacity="0.95"/>
+                <rect x="224" y="220" width="96" height="10" rx="1" fill="#fff" opacity="0.95"/>
+                <rect x="328" y="220" width="68" height="10" rx="1" fill="#34d399" opacity="0.95"/>
+                <rect x="404" y="220" width="54" height="10" rx="1" fill="#fff" opacity="0.95"/>
+                <rect x="466" y="220" width="64" height="10" rx="1" fill="#f472b6" opacity="0.95"/>
+              </g>
+
+              <!-- Glow underline -->
+              <rect x="62" y="233" width="476" height="2" class="install-screen-glow" opacity="0"/>
+            </g>
+
+            <!-- Tracking dots (stage 4) -->
+            <g class="install-tracks" filter="url(#installGlow)">
+              <circle cx="120" cy="196" r="4" class="install-track-dot" style="--d:0"/>
+              <circle cx="240" cy="184" r="4" class="install-track-dot" style="--d:0.15"/>
+              <circle cx="340" cy="192" r="4" class="install-track-dot" style="--d:0.3"/>
+              <circle cx="420" cy="186" r="4" class="install-track-dot" style="--d:0.45"/>
+              <circle cx="500" cy="198" r="4" class="install-track-dot" style="--d:0.6"/>
+            </g>
+          </svg>
+
+          <div class="install-progress-track" aria-hidden="true">
+            <div class="install-progress-fill"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -3055,6 +3403,47 @@
       });
     }, { threshold: 0.4 });
     tabSections.forEach(s => tabObserver.observe(s));
+
+    // Install scroll animation — drive stage progress from scroll position
+    (function () {
+      var section = document.getElementById('install');
+      if (!section) return;
+      var steps = section.querySelectorAll('.install-steps li');
+
+      // Stage ranges [start, end] in overall progress 0–1
+      var stages = [[0, 0.22], [0.18, 0.5], [0.45, 0.72], [0.68, 1]];
+
+      function clamp(v) { return Math.max(0, Math.min(1, v)); }
+
+      function update() {
+        var rect = section.getBoundingClientRect();
+        var vh = window.innerHeight;
+        var travel = rect.height - vh;
+        if (travel <= 0) return;
+        var p = clamp(-rect.top / travel);
+        section.style.setProperty('--p', p.toFixed(4));
+        var activeIdx = 0;
+        stages.forEach(function (r, i) {
+          var lp = clamp((p - r[0]) / (r[1] - r[0]));
+          section.style.setProperty('--p' + (i + 1), lp.toFixed(4));
+          if (lp > 0.25) activeIdx = i;
+        });
+        steps.forEach(function (li, i) {
+          li.classList.toggle('active', i === activeIdx);
+        });
+      }
+
+      var ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () { update(); ticking = false; });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
+    })();
 
     // Questionnaire
     (function () {
